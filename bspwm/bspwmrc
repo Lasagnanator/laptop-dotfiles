@@ -3,7 +3,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 picom &
 #feh --background-fill ~/Pictures/Wallpapers/ &
-~/.config/polybar/launch.sh
+$HOME/.config/polybar/launch.sh
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
