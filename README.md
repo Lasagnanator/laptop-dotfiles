@@ -6,8 +6,9 @@ Dotfiles from my Linux installations
     +bspwm
     +sxhkd
     +polybar
-    +rofi
+    +picom
     +feh
+    +rofi
     +kitty
     +firefox
     +vim/neovim
