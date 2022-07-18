@@ -10,6 +10,6 @@ Dotfiles from my Linux installations
     +feh
     +kitty
     +firefox
-    +vim/nvim
-    +tmux (?)
+    +vim/neovim
     +ranger
+    +tmux (?)
