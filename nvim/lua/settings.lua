@@ -1,18 +1,23 @@
 local settings = {
-	number = true,
+    number         = true,
     relativenumber = true,
-	cursorline = true,
-	cursorlineopt = number,
-	autoindent = true,
-	expandtab = true,
-	tabstop = 4,
-	background = dark,
+    numberwidth    = 4,
+    cursorline     = true,
+    cursorlineopt  = "number",
+    autoindent     = true,
+    expandtab      = true,
+    shiftwidth     = 4,
+    tabstop        = 4,
+    showmode       = true,
+    hlsearch       = false,
 }
 
 for k, v in pairs(settings) do
-vim.opt[k] = v
+    vim.opt[k] = v
 end
 
+vim.cmd [[
+    colorscheme dracula
+]]
+
 --syntax on
---colorscheme dracula
---g:dracula_colorterm=0
