@@ -10,6 +10,7 @@ local settings = {
     tabstop        = 4,
     showmode       = true,
     hlsearch       = false,
+    termguicolors  = true,
 }
 
 for k, v in pairs(settings) do

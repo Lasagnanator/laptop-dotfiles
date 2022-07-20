@@ -35,7 +35,7 @@ super + m
     bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
-super + y
+super + alt + y
     bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest window
@@ -52,7 +52,7 @@ super + {_,shift + } #,s,f
     bspc node -t {floating,fullscreen} #tiled,pseudo_tiled,
 
 # set the node flags
-super + {alt + y,x,s,z}
+super + {y,x,s,z}
     bspc node -g {marked,locked,sticky,private}
 
 #
@@ -63,10 +63,6 @@ super + {alt + y,x,s,z}
 super + {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
 
-# focus the node for the given path jump
-#super + {p,b,comma,period}
-#    bspc node -f @{parent,brother,first,second}
-
 # focus the next/previous window in the current desktop
 super + {_,alt + }Tab
     bspc node -f {next,prev}.local.!hidden.window
@@ -74,6 +70,18 @@ super + {_,alt + }Tab
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
     bspc desktop -f {prev,next}.local
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+# rotate the windows in a dekstop
+super + {o,i}
+    bspc node first_ancestor -R {90,270}
+
+# balance windows
+super + b
+    bspc node first-ancestor -B
 
 # focus the last node/desktop
 #super + {grave,Tab}
@@ -85,9 +93,6 @@ super + bracket{left,right}
 #    bspc node {older,newer} -f; \
 #    bspc wm -h on
 
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
 # preselect
