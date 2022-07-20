@@ -19,5 +19,3 @@ end
 vim.cmd [[
     colorscheme dracula
 ]]
-
---syntax on

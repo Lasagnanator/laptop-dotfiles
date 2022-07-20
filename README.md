@@ -50,6 +50,11 @@ Install interception-tools and interception-dual-function-keys (pacman), then co
         TAP: KEY_BACKSLASH
         HOLD: KEY_LEFTMETA
         HOLD_START: BEFORE_CONSUME_OR_RELEASE
+      - KEY: KEY_SPACE
+        TAP: KEY_SPACE
+        HOLD: KEY_LEFTALT
+        HOLD_START: BEFORE_CONSUME_OR_RELEASE
+
 
 and configure /etc/interception/udevmon.d/keyboard.yaml with this:
 
@@ -57,7 +62,7 @@ and configure /etc/interception/udevmon.d/keyboard.yaml with this:
       DEVICE:
         NAME: "NAMEOFDEVICE"
         EVENTS:
-          EV_KEY: [KEY_CAPSLOCK, KEY_TAB, KEY_LEFTCTRL, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_BACKSLASH]
+          EV_KEY: [KEY_CAPSLOCK, KEY_TAB, KEY_LEFTCTRL, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_BACKSLASH, KEY_SPACE]
 
 where NAMEOFDEVICE can be obtained with
     
