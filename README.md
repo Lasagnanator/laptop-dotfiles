@@ -10,15 +10,19 @@ Dotfiles from my Linux installations
     +feh
     +rofi
     +kitty
+    +interception-tools
+    +interception-dual-function-keys
     +firefox
     +vim/neovim
     +ranger
     +tmux (?)
-    +noto fonts
+    +noto-fonts
+    +adobe-source-han-sans-otc-fonts
+    +a nerd font
     +zsh (?)
     
 # Interception and Dual Function Keys
-Install interception-tools and interception-dual-function-keys (pacman), then configure /etc/interception/dual-function-keys/modifiers.yaml with this code:
+Configure /etc/interception/dual-function-keys/modifiers.yaml as:
 
     TIMING:
       TAP_MILLISEC: 200
@@ -56,15 +60,11 @@ Install interception-tools and interception-dual-function-keys (pacman), then co
         HOLD_START: BEFORE_CONSUME_OR_RELEASE
 
 
-and configure /etc/interception/udevmon.d/keyboard.yaml with this:
+and /etc/interception/udevmon.d/keyboard.yaml as:
 
-    -JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/interception/dual-function-keys/modifiers.yaml | uinput -d $DEVNODE"
+    - JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/interception/dual-function-keys/modifiers.yaml | uinput -d $DEVNODE"
       DEVICE:
-        NAME: "NAMEOFDEVICE"
         EVENTS:
           EV_KEY: [KEY_CAPSLOCK, KEY_TAB, KEY_LEFTALT, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_BACKSLASH, KEY_SPACE]
-where NAMEOFDEVICE can be obtained with
-    
-    sudo uinput -p -d /dev/input/by-id/NAMEOFDEVICE
 
 in case of doubt, consult the gitlab page of interception.

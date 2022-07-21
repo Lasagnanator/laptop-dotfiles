@@ -4,6 +4,7 @@ return require('packer').startup( {function()
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'preservim/nerdtree'
+    use  'lambdalisue/suda.vim'
     use 'junegunn/fzf.vim'
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-surround'

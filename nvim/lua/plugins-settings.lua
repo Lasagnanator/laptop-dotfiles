@@ -43,6 +43,8 @@ require ('nvim-treesitter.configs').setup {
     }
 }
 
+vim.g.suda_smart_edit = true
+
 -- Lua colorizer settings
 require ('colorizer').setup {
     DEFAULT_OPTIONS = {
