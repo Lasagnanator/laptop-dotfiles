@@ -9,7 +9,7 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
-browser = firefox
+browser = "firefox"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -50,7 +50,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "p", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -80,7 +80,15 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=1),
+    layout.Columns(
+        border_focus       = "#FFB86C",
+        border_normal      = "#BD93F9",
+        border_focus_stack = "#FF79C6",
+        border_width       = 1,
+        border_on_single   = True,
+        margin             = 5,
+        margin_on_single   = 5,
+    ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -104,7 +112,9 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        Bottom=bar.Bar(
+        wallpaper="~/.config/wallpapers/SynthPyramids.jpg",
+        wallpaper_mode="fill",
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
@@ -123,9 +133,13 @@ screens = [
                 widget.QuickExit(),
             ],
             24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            margin = [0, 0, 5, 0],
+            # border_width=[0, 0, 5, 0],  # Draw top and bottom borders
+            # border_color=["#ff00ff", "#000000", "#ff00ff", "#000000"]  # Borders are magenta
         ),
+        bottom=bar.Gap(5),
+        left=bar.Gap(5),
+        right=bar.Gap(5),
     ),
 ]
 
