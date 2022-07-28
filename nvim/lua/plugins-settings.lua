@@ -25,7 +25,29 @@ require('lualine').setup {
         lualine_y = {},
         lualine_z = {}
     },
-    tabline = {},
+    tabline = {
+        lualine_a = {
+            {
+                'filename',
+                path = 1,
+            },
+        },
+        lualine_b = {
+            {
+                'tabs',
+                max_length = vim.o.columns / 3,
+                mode = 1,
+                tabs_color = {
+                    active = 'lualine_b_inactive',
+                    inactive = 'lualine_c_inactive',
+                },
+            },
+        },
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
     extensions = {}
 }
 
