@@ -1,7 +1,8 @@
 local settings = {
     number         = true,
     relativenumber = true,
-    numberwidth    = 4,
+    numberwidth    = 5,
+    signcolumn     = "number",
     cursorline     = true,
     cursorlineopt  = "number",
     autoindent     = true,
@@ -11,6 +12,7 @@ local settings = {
     showmode       = true,
     hlsearch       = false,
     termguicolors  = true,
+    mouse          = "a",
 }
 
 for k, v in pairs(settings) do
