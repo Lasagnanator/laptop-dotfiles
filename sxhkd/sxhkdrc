@@ -129,3 +129,27 @@ super + ctrl + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# Other
+#
+
+# Volume up
+XF86AudioRaiseVolume 
+    $HOME/.config/sxhkd/raise-volume.sh
+
+# Volume down
+XF86AudioLowerVolume 
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
+
+# Volume mute
+XF86AudioMute
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Brightness up
+XF86MonBrightnessUp
+    xbacklight -inc 1
+
+# Brightness down
+XF86MonBrightnessDown
+    xbacklight -dec 1

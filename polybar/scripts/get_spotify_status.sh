@@ -14,7 +14,7 @@ PLAYER="playerctl"
 # Format of the information displayed
 # Eg. {{ artist }} - {{ album }} - {{ title }}
 # See more attributes here: https://github.com/altdesktop/playerctl/#printing-properties-and-metadata
-FORMAT="{{ title }} - {{ artist }}"
+FORMAT="{{ title }}"
 
 # Sends $2 as message to all polybar PIDs that are part of $1
 update_hooks() {
@@ -30,7 +30,7 @@ EXIT_CODE=$?
 if [ $EXIT_CODE -eq 0 ]; then
     STATUS=$PLAYERCTL_STATUS
 else
-    STATUS=""
+    STATUS="No player"
 fi
 
 if [ "$1" == "--status" ]; then
@@ -38,10 +38,10 @@ if [ "$1" == "--status" ]; then
 else
     if [ "$STATUS" = "Stopped" ]; then
         echo "No music is playing"
-    elif [ "$STATUS" = "Paused"  ]; then
+    elif [ "$STATUS" = "Paused" ]; then
         update_hooks "$PARENT_BAR_PID" 2
         playerctl --player=$PLAYER metadata --format "$FORMAT"
-    elif [ "$STATUS" = "No player is running"  ]; then
+    elif [ "$STATUS" = "No player is running" ]; then
         echo "$STATUS"
     else
         update_hooks "$PARENT_BAR_PID" 1
