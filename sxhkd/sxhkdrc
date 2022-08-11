@@ -46,10 +46,13 @@ super + shift + Return
 # state/flags
 #
 
+# set tiled
+super + t
+    bspc node -t {tiled}
+
 # set the window state
-# Maybe remove pseudo_tiled
-super + {_,shift + } #,s,f
-    bspc node -t {floating,fullscreen} #tiled,pseudo_tiled,
+super + {_,shift + } f
+    bspc node -t {fullscreen, floating}
 
 # set the node flags
 super + {y,x,s,z}

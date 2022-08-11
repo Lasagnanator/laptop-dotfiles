@@ -34,7 +34,7 @@ fuzzy_edges 0
 
 # geometry <geometry>        # tray's geometry in standard X notation; width and
                              # height are specified in slot_size multiples
-geometry 1x1+1572+26
+geometry 1x1+1574+24
 
 # grow_gravity <gravity>     # one of N, S, E, W, NW, NE, SW, SE; tray will grow
                              # in the direction opposite to one specified by
@@ -94,7 +94,7 @@ scrollbars none
 
 # slot_size <int>            # specifies size of icon slot, defaults to
                              # icon_size NEW in @VERSION_STR@.
-slot_size 29
+slot_size 27
 
 # skip_taskbar [<bool>]      # hide tray`s window from the taskbar
 skip_taskbar true
