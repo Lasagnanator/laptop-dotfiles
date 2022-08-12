@@ -156,3 +156,19 @@ XF86MonBrightnessUp
 # Brightness down
 XF86MonBrightnessDown
     xbacklight -dec 1
+
+# Play/pause track
+XF86AudioPlay
+    playerctl play-pause
+
+# Next track
+XF86AudioNext
+    playerctl next
+
+# Previous track
+XF86AudioPrev
+    playerctl previous
+
+# Toggle systray
+super + backslash
+    systray
