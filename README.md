@@ -6,6 +6,10 @@ Dotfiles from my Linux installations
     +bspwm
     +sxhkd
     +polybar
+        +pacman-contrib
+        +playerctl
+        +zscroll
+        +stalonerc
     +picom
     +feh
     +rofi
@@ -19,6 +23,7 @@ Dotfiles from my Linux installations
     +noto-fonts
     +adobe-source-han-sans-otc-fonts
     +a nerd font
+    +xbacklight or equivalent
     +zsh (?)
     
 # Interception and Dual Function Keys
@@ -53,10 +58,6 @@ Configure /etc/interception/dual-function-keys/modifiers.yaml as:
       - KEY: KEY_BACKSLASH
         TAP: KEY_BACKSLASH
         HOLD: KEY_LEFTMETA
-        HOLD_START: BEFORE_CONSUME_OR_RELEASE
-      - KEY: KEY_SPACE
-        TAP: KEY_SPACE
-        HOLD: KEY_LEFTALT
         HOLD_START: BEFORE_CONSUME_OR_RELEASE
 
 
