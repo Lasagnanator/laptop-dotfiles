@@ -9,7 +9,7 @@ Dotfiles from my Linux installations
         +pacman-contrib
         +playerctl
         +zscroll
-        +stalonerc
+        +stalonetray
     +picom
     +feh
     +rofi
