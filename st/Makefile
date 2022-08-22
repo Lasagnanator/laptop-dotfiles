@@ -32,6 +32,9 @@ st: $(OBJ)
 clean:
 	rm -f st $(OBJ) st-$(VERSION).tar.gz
 
+rmconf:
+	rm -f config.h
+
 dist: clean
 	mkdir -p st-$(VERSION)
 	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
@@ -54,4 +57,4 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all options clean rmconf dist install uninstall
