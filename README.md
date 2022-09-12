@@ -3,9 +3,9 @@ Dotfiles from my Linux installations
 
 # Dependencies
 
-    +bspwm
-    +sxhkd
-    +polybar
+    +dwm, lasagna edition (included as submodule)
+        +yajl
+    +polybar dwm module (included as submodule)
         +pacman-contrib
         +playerctl
         +zscroll
@@ -13,17 +13,18 @@ Dotfiles from my Linux installations
     +picom
     +feh
     +rofi
-    +kitty
+    +kitty (not necessary, st included)
     +interception-tools
     +interception-dual-function-keys
     +firefox
     +vim/neovim
     +ranger
     +tmux (?)
-    +noto-fonts
+    +noto-fonts (or another monospace font)
     +adobe-source-han-sans-otc-fonts
-    +a nerd font
+    +noto nerd fonts (or equivalent) 
     +xbacklight or equivalent
+    +pipewire, with compatibility packages for alsa, jack and pulseaudio (important)
     +zsh (?)
     
 # Interception and Dual Function Keys

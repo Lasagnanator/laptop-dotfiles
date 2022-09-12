@@ -11,6 +11,7 @@ return require('packer').startup( {function()
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'preservim/nerdtree'
+    use 'tpope/vim-fugitive'
     use 'lambdalisue/suda.vim'
     use 'junegunn/fzf.vim'
     use 'jiangmiao/auto-pairs'
