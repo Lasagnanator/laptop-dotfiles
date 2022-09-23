@@ -9,6 +9,7 @@ local settings = {
     expandtab      = true,
     shiftwidth     = 4,
     tabstop        = 4,
+    wrap           = false,
     showmode       = true,
     hlsearch       = false,
     termguicolors  = true,
