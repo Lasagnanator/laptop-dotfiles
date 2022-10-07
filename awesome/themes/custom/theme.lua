@@ -134,6 +134,13 @@ rnotification.connect_signal('request::rules', function()
     }
 end)
 
+-- {{{ Bling
+-- theme.dont_swallow_classname_list = { "firefox", "Gimp", "Blender" } 
+-- theme.dont_swallow_filter_activated = true
+theme.parent_filter_list   = { "firefox", "Gimp", "Blender" } -- class names list of parents that should not be swallowed
+theme.child_filter_list    = { "kitty" }                    -- class names list that should not swallow their parents
+theme.swallowing_filter    = true                           -- whether the filters above should be active
+
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

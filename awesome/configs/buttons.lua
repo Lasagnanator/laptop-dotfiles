@@ -2,6 +2,7 @@
 local awful = require("awful")
 -- Organized modules for cleaner code
 local global = require("configs.global")
+require("configs.bar")
 
 -- {{{ Variables
 modkey = global.modkey

@@ -1,24 +1,26 @@
-lutris/
-discord/
-mimeapps.list
-rua/
+AliceVision/
 BetterDiscord Installer/
-gtk-2.0/
-gtk-3.0/
-spotify/
-dconf/
-pulse/
+blender/
 btop/
 cat_installer/
+Code - OSS/
+configstore/
+darktable/
+dconf/
+discord/
+dwm-extra/
+Electron/ 
+flameshot/
+gtk-2.0/
+gtk-3.0/
 htop/
 lsp-plugins/
-QtProject.conf
-flameshot/
+lutris/
+mimeapps.list
 onlyoffice/
-dwm-extra/
-AliceVision/
-blender/
-darktable/
-configstore/
-Code - OSS/
-Electron/ 
+pulse/
+QtProject.conf
+rua/
+spotify/
+unity3d/
+unityhub/

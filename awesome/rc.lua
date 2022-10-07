@@ -20,9 +20,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
                       require("awful.hotkeys_popup.keys")
--- Additional libraries
-local bling         = require("bling")
-
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -30,15 +27,17 @@ local bling         = require("bling")
 naughty.connect_signal("request::display_error", function(message, startup)
     naughty.notification {
         urgency = "critical",
-        title   = "WTF u were doin"..(startup and " during startup!" or "!"),
+        title   = "WTF were u doin"..(startup and " while starting this shit" or "?"),
         message = message
     }
 end)
 
--- Organized modules for cleaner code
-local global        = require("configs.global")
-                      require("configs.keybindings")
-                      require("configs.buttons")
+-- {{{ Organized modules for cleaner code
+local global = require("configs.global")
+               require("configs.keybindings")
+               require("configs.buttons")
+-- require("configs.functions")
+-- require("configs.widgets")
 -- require("configs.bar")
 -- require("configs.rules")
 
@@ -55,6 +54,11 @@ explorer_cmd = global.explorer_cmd
 local theme_name = "custom"
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), theme_name)
 beautiful.init(theme_path)
+
+-- {{{ Bling
+local bling = require("bling")
+bling.module.window_swallowing.start()
+require("configs.scratchpads")
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -90,6 +94,12 @@ tag.connect_signal("request::default_layouts", function()
         awful.layout.suit.fair.horizontal,
 --      awful.layout.suit.spiral,
 --      awful.layout.suit.spiral.dwindle,
+        bling.layout.mstab,
+        bling.layout.centered,
+--      bling.layout.vertical,
+--      bling.layout.horizontal,
+--      bling.layout.equalarea,
+--      bling.layout.deck,
         awful.layout.suit.max,
 --      awful.layout.suit.max.fullscreen,
 --      awful.layout.suit.magnifier,
