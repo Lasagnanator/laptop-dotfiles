@@ -31,6 +31,7 @@ naughty.connect_signal("request::display_error", function(message, startup)
         message = message
     }
 end)
+-- }}}
 
 -- {{{ Organized modules for cleaner code
 local global = require("configs.global")
@@ -40,6 +41,7 @@ local global = require("configs.global")
 -- require("configs.widgets")
 -- require("configs.bar")
 -- require("configs.rules")
+-- }}}
 
 -- {{{ Variables
 modkey = global.modkey
@@ -49,37 +51,18 @@ editor = global.editor
 explorer = global.explorer
 editor_cmd = global.editor_cmd
 explorer_cmd = global.explorer_cmd
+-- }}}
 
 -- {{{ Theme definition
 local theme_name = "custom"
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), theme_name)
 beautiful.init(theme_path)
+-- }}}
 
 -- {{{ Bling
 local bling = require("bling")
 bling.module.window_swallowing.start()
 require("configs.scratchpads")
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Tag layout
@@ -130,7 +113,6 @@ end)
 -- }}}
 
 -- {{{ Wibar
-
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -259,64 +241,10 @@ ruled.client.connect_signal("request::rules", function()
         },
         properties = { floating = true }
     }
-
-    -- Add titlebars to normal clients and dialogs
-    -- ruled.client.append_rule {
-    --     id         = "titlebars",
-    --     rule_any   = { type = { "normal", "dialog" } },
-    --     properties = { titlebars_enabled = true      }
-    -- }
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- ruled.client.append_rule {
-    --     rule       = { class = "Firefox"     },
-    --     properties = { screen = 1, tag = "2" }
-    -- }
-end)
--- }}}
-
--- {{{ Titlebars
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = {
-        awful.button({ }, 1, function()
-            c:activate { context = "titlebar", action = "mouse_move"  }
-        end),
-        awful.button({ }, 3, function()
-            c:activate { context = "titlebar", action = "mouse_resize"}
-        end),
-    }
-
-    awful.titlebar(c).widget = {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                halign = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
 end)
 -- }}}
 
 -- {{{ Notifications
-
 ruled.notification.connect_signal('request::rules', function()
     -- All notifications will match this rule.
     ruled.notification.append_rule {
@@ -331,7 +259,6 @@ end)
 naughty.connect_signal("request::display", function(n)
     naughty.layout.box { notification = n }
 end)
-
 -- }}}
 
 -- Enable sloppy focus, so that focus follows mouse.
