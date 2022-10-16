@@ -9,6 +9,7 @@ local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
+local colors = require("themes.custom.colors")
 
 local theme = {}
 
@@ -27,9 +28,18 @@ theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap         = dpi(5)
 theme.border_width        = dpi(1)
-theme.border_color_normal = "#000000"
-theme.border_color_active = "#535d6c"
-theme.border_color_marked = "#91231c"
+theme.border_color_normal = colors.purple
+theme.border_color_active = colors.orange
+theme.border_color_marked = colors.fucsia
+
+theme.taglist_fg_empty    = theme.fg_normal
+theme.taglist_bg_empty    = theme.bg_normal
+theme.taglist_fg_focus    = colors.purple
+theme.taglist_bg_focus    = colors.orange
+theme.taglist_fg_occupied = colors.purple
+theme.taglist_bg_occupied = theme.bg_normal
+theme.taglist_fg_urgent   = colors.cyan
+theme.taglist_bg_urgent   = theme.bg_normal
 
 -- There are other variable sets
 -- overriding the default one when
@@ -137,7 +147,7 @@ end)
 -- {{{ Bling
 -- theme.dont_swallow_classname_list = { "firefox", "Gimp", "Blender" } 
 -- theme.dont_swallow_filter_activated = true
-theme.parent_filter_list   = { "firefox", "Gimp", "Blender" } -- class names list of parents that should not be swallowed
+theme.parent_filter_list   = { "firefox", "Gimp", "Blender", "Lutris" } -- class names list of parents that should not be swallowed
 theme.child_filter_list    = { "kitty" }                    -- class names list that should not swallow their parents
 theme.swallowing_filter    = true                           -- whether the filters above should be active
 

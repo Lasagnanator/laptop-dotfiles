@@ -15,13 +15,6 @@ explorer = global.explorer
 editor_cmd = global.editor_cmd
 explorer_cmd = global.explorer_cmd
 
-
-function cwdterm()
-    -- if awful.client.focus.class == "kitty" then
-        awful.spawn(terminal .. awful.client.focus.name)
-    -- end
-end
-
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -229,8 +222,6 @@ client.connect_signal("request::default_keybindings", function()
                 c:raise()
             end ,
             {description = "(un)maximize horizontally", group = "client"}),
-        awful.key({ modkey, "Mod1"   }, "Return", function () cwdterm() end,
-            {description = "test", group = "client"}),
     })
 end)
 

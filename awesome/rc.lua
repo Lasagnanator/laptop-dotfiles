@@ -20,6 +20,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
                       require("awful.hotkeys_popup.keys")
+local lain          = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -33,14 +34,13 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 -- }}}
 
--- {{{ Organized modules for cleaner code
+-- {{{ Modules
 local global = require("configs.global")
                require("configs.keybindings")
                require("configs.buttons")
--- require("configs.functions")
--- require("configs.widgets")
--- require("configs.bar")
--- require("configs.rules")
+               -- require("configs.widgets")
+               -- require("configs.bar")
+               -- require("configs.rules")
 -- }}}
 
 -- {{{ Variables
@@ -121,7 +121,7 @@ mytextclock = wibox.widget.textclock()
    
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "一", "二", "三", "四", "五", "六", "七", "八", "九" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -155,8 +155,30 @@ screen.connect_signal("request::desktop_decoration", function(s)
                                                 client.focus:toggle_tag(t)
                                             end
                                         end),
-            awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
-            awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
+            -- awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+            -- awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
+        }
+    }
+
+    -- Custom taglist
+    s.mytaglist = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter.all,
+        buttons = {
+            awful.button({ }, 1, function(t) t:view_only() end),
+            awful.button({ modkey }, 1, function(t)
+                                            if client.focus then
+                                                client.focus:move_to_tag(t)
+                                            end
+                                        end),
+            awful.button({ }, 3, awful.tag.viewtoggle),
+            awful.button({ modkey }, 3, function(t)
+                                            if client.focus then
+                                                client.focus:toggle_tag(t)
+                                            end
+                                        end),
+            -- awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+            -- awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
         }
     }
 
@@ -180,30 +202,36 @@ screen.connect_signal("request::desktop_decoration", function(s)
         screen   = s,
         widget   = {
             layout = wibox.layout.align.horizontal,
+            expand = "none",
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
+                s.mylayoutbox,
                 mylauncher,
-                s.mytaglist,
                 s.mypromptbox,
             },
-            s.mytasklist, -- Middle widget
+            { -- Middle widget
+                layout = wibox.layout.align.horizontal,
+                expand = "none",
+                s.mytaglist,
+                -- s.mytasklist,
+            },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                mykeyboardlayout,
+                -- mykeyboardlayout,
                 wibox.widget.systray(),
                 mytextclock,
-                s.mylayoutbox,
             },
         }
     }
 end)
+-- }}}
 
 -- {{{ Client management
 client.connect_signal("manage", function(c)
      if not awesome.startup then awful.client.setslave(c) end
 end)
 -- }}}
-
+                                             
 -- {{{ Rules
 -- Rules to apply to new clients.
 ruled.client.connect_signal("request::rules", function()

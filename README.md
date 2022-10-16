@@ -1,7 +1,7 @@
 # Laptop's .dotfiles
 Dotfiles from my Linux installations
 
-# Dependencies
+## Dependencies
 
     +dwm, lasagna edition (included as submodule)
         +yajl
@@ -27,7 +27,7 @@ Dotfiles from my Linux installations
     +pipewire, with compatibility packages for alsa, jack and pulseaudio (important)
     +zsh (?)
     
-# Interception and Dual Function Keys
+## Interception and Dual Function Keys
 Configure /etc/interception/dual-function-keys/modifiers.yaml as:
 
     TIMING:

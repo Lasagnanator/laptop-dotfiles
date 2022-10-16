@@ -11,9 +11,15 @@ return require('packer').startup( {function()
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'preservim/nerdtree'
+--    use {
+--        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+--        requires = {
+--            'nvim-lua/plenary.nvim',
+--            'kyazdani42/nvim-web-devicons',
+--        }
+--    }  
     use 'tpope/vim-fugitive'
     use 'lambdalisue/suda.vim'
-    use 'junegunn/fzf.vim'
     use 'jiangmiao/auto-pairs'
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'

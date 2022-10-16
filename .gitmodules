@@ -7,3 +7,6 @@
 [submodule "awesome/bling"]
 	path = awesome/bling
 	url = https://github.com/BlingCorp/bling.git
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = https://github.com/lcpz/lain.git
