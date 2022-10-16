@@ -109,7 +109,7 @@ awful.keyboard.append_global_keybindings({
               {description = "select previous", group = "layout"}),
 })
 
-
+-- Number row keybindings
 awful.keyboard.append_global_keybindings({
     awful.key {
         modifiers   = { modkey },
@@ -179,6 +179,27 @@ awful.keyboard.append_global_keybindings({
     }
 })
 
+-- Media keys bindings
+awful.keyboard.append_global_keybindings({
+    awful.key({}, "XF86AudioRaiseVolume",  function() awful.spawn.with_shell("raise-volume") end,
+              {description="raise volume",       group="media"}),
+    awful.key({}, "XF86AudioLowerVolume",  function() awful.spawn.with_shell("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-") end,
+              {description="lower volume",       group="media"}),
+    awful.key({}, "XF86AudioMute",         function() awful.spawn.with_shell("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") end,
+              {description="mute audio",         group="media"}),
+    awful.key({}, "XF86MonBrightnessUp",   function() awful.spawn.with_shell("xbacklight -inc 1") end,
+              {description="increase backlight", group="media"}),
+    awful.key({}, "XF86MonBrightnessDown", function() awful.spawn.with_shell("xbacklight -dec 1") end,
+              {description="decrease backlight", group="media"}),
+    awful.key({}, "XF86AudioPlay",         function() awful.spawn.with_shell("playerctl play-pause") end,
+              {description="play/pause",         group="media"}),
+    awful.key({}, "XF86AudioNext",         function() awful.spawn.with_shell("playerctl next") end,
+              {description="next track",         group="media"}),
+    awful.key({}, "XF86AudioPrev",         function() awful.spawn.with_shell("playerctl previous") end,
+              {description="previous track",     group="media"}),
+})
+
+-- Client keybindings
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
         awful.key({ modkey,           }, "f",
