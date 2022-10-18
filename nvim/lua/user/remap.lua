@@ -15,6 +15,7 @@ keymap( "n", "<Leader>q",     ":q!<CR>",                 options )
 keymap( "n", "<Leader>W",     ":wa<CR>",                 options )
 keymap( "n", "<Leader>Q",     ":qa!<CR>",                options )
 keymap( "n", "<Leader>e",     ":e ",                     options )
+keymap( "n", "<Leader>@",     ":set cursorcolumn!<CR>",  options )
 
 -- Window management
 keymap( "n", "<Leader>v",     ":vsplit ",                options )
@@ -36,15 +37,17 @@ keymap( "n", "<A-k>",         "<C-W>K",                  options )
 keymap( "n", "<A-l>",         "<C-W>L",                  options )
 
 -- Resize windows
-keymap( "n", "<C-Left>",      ":vertical resize -2<CR>", options )
-keymap( "n", "<C-Right>",     ":vertical resize +2<CR>", options )
-keymap( "n", "<C-Up>",        ":resize +2<CR>",          options )
-keymap( "n", "<C-Down>",      ":resize -2<CR>",          options )
+keymap( "n", "<C-Left>",      ":vertical resize -1<CR>", options )
+keymap( "n", "<C-Right>",     ":vertical resize +1<CR>", options )
+keymap( "n", "<C-Up>",        ":resize +1<CR>",          options )
+keymap( "n", "<C-Down>",      ":resize -1<CR>",          options )
 
 -- Tabs
 keymap( "n", "<Leader>t",     ":tabnew ",                options )
-keymap( "n", "<A-PageUp>",    ":+tabmove<CR>",           options )
-keymap( "n", "<A-PageDown>",  ":-tabmove<CR>",           options )
+keymap( "n", "<C-.>",         ":tabnext<CR>",            options )
+keymap( "n", "<C-,>",         ":tabprevious<CR>",        options )
+keymap( "n", "<A-.>",         ":+tabmove<CR>",           options )
+keymap( "n", "<A-,>",         ":-tabmove<CR>",           options )
 
 --< VISUAL MODE >--
 
