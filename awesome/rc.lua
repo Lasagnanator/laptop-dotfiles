@@ -35,15 +35,13 @@ end)
 -- }}}
 
 -- {{{ Modules
-local global = require("configs.global")
-               require("configs.keybindings")
-               require("configs.buttons")
                -- require("configs.widgets")
                -- require("configs.bar")
                -- require("configs.rules")
 -- }}}
 
 -- {{{ Variables
+local global = require("configs.global")
 modkey = global.modkey
 terminal = global.terminal
 browser = global.browser
@@ -54,8 +52,7 @@ explorer_cmd = global.explorer_cmd
 -- }}}
 
 -- {{{ Theme definition
-local theme_name = "custom"
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), theme_name)
+local theme_path = global.theme_path
 beautiful.init(theme_path)
 -- }}}
 
@@ -110,6 +107,11 @@ screen.connect_signal("request::wallpaper", function(s)
         }
     }
 end)
+-- }}}
+
+-- {{{ Keybinds and buttons
+require("configs.keybindings")
+require("configs.buttons")
 -- }}}
 
 -- {{{ Wibar
