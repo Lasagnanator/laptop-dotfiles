@@ -48,6 +48,6 @@ local term_scratch = bling.module.scratchpad {
 }
 
 awful.keyboard.append_global_keybindings({
-    awful.key({ modkey, "Mod1"    }, "u", function() term_scratch:toggle() end,
+    awful.key({ modkey,           }, "n", function() term_scratch:toggle() end,
               {description="launch terminal scratchpad", group="launcher"}),
 })

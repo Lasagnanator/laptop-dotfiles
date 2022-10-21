@@ -3,14 +3,13 @@
 --------------
 
 -- Standard awesome library
-local awful = require("awful")
--- Theme handling library
-local beautiful     = require("beautiful")
+local awful         = require("awful")
+-- Notification library
+local naughty       = require("naughty")
 -- Declarative object management
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Bling
-local bling = require("bling")
+local bling         = require("bling")
 
 -- Variables
 local global = require("configs.global")
@@ -151,10 +150,10 @@ awful.keyboard.append_global_keybindings({
               { description = "decrease client height factor",         group = "client" }),
     awful.key({ modkey, "Control" }, "k", function() awful.client.incwfact( 0.05)        end,
               { description = "increase client height factor",         group = "client" }),
-    awful.key({ modkey, "Control" }, "l", function() awful.tag.incmwfact( 0.05)          end,
-              { description = "increase master width factor",          group = "layout functions" }),
     awful.key({ modkey, "Control" }, "h", function() awful.tag.incmwfact(-0.05)          end,
               { description = "decrease master width factor",          group = "layout functions" }),
+    awful.key({ modkey, "Control" }, "l", function() awful.tag.incmwfact( 0.05)          end,
+              { description = "increase master width factor",          group = "layout functions" }),
     awful.key({ modkey, "Mod1"    }, "h", function() awful.tag.incnmaster( 1, nil, true) end,
               { description = "increase the number of master clients", group = "layout functions" }),
     awful.key({ modkey, "Mod1"    }, "l", function() awful.tag.incnmaster(-1, nil, true) end,
@@ -162,6 +161,35 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, "Shift"   }, "h", function() awful.tag.incncol(-1, nil, true)    end,
               { description = "increase the number of columns",        group = "layout functions" }),
     awful.key({ modkey, "Shift"   }, "l", function() awful.tag.incncol( 1, nil, true)    end,
+              { description = "decrease the number of columns",        group = "layout functions" }),
+    awful.key({ modkey,           }, "r", function()
+        local tag = awful.screen.focused().selected_tag
+        tag.master_width_factor = 0.5
+        tag.master_count = 1
+        count = 0
+        for _ in pairs(tag:clients()) do count = count + 1 end
+        fact = 1 / (count - 1)
+        if ( count < 2 ) then
+            naughty.notify{
+                title = "Warning",
+                text  = "Didn't reset wfact since there aren't enough windows",
+            }
+            goto exit
+        end 
+        prior_wfact = tag.windowfact[1][2]
+        naughty.notify{
+            title = "Debug",
+            text  = "Starting wfact: " .. prior_wfact
+        }
+        naughty.notify{
+            title = "Debug",
+            text  = "Count: " .. count .. "\nFact: " .. fact,
+        }
+        for _,c  in ipairs(tag:clients()) do
+            awful.client.setwfact(fact, c)
+        end
+        ::exit::
+    end,
               { description = "decrease the number of columns",        group = "layout functions" }),
 })
 
@@ -175,7 +203,7 @@ awful.keyboard.append_global_keybindings({
               { description = "fair",            group = "layout" }),
     awful.key({ modkey, "Control" }, "g", function() awful.layout.set(awful.layout.suit.fair.horizontal) end,
               { description = "fair horizontal", group = "layout" }),
-    awful.key({ modkey,           }, "r", function() awful.layout.set(bling.layout.mstab)                end,
+    awful.key({ modkey, "Control" }, "d", function() awful.layout.set(bling.layout.mstab)                end,
               { description = "tabs (?)",        group = "layout" }),
     awful.key({ modkey,           }, "d", function() awful.layout.set(bling.layout.centered)             end,
               { description = "centered master", group = "layout" }),
