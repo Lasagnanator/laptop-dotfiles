@@ -166,31 +166,8 @@ awful.keyboard.append_global_keybindings({
         local tag = awful.screen.focused().selected_tag
         tag.master_width_factor = 0.5
         tag.master_count = 1
-        count = 0
-        for _ in pairs(tag:clients()) do count = count + 1 end
-        fact = 1 / (count - 1)
-        if ( count < 2 ) then
-            naughty.notify{
-                title = "Warning",
-                text  = "Didn't reset wfact since there aren't enough windows",
-            }
-            goto exit
-        end 
-        prior_wfact = tag.windowfact[1][2]
-        naughty.notify{
-            title = "Debug",
-            text  = "Starting wfact: " .. prior_wfact
-        }
-        naughty.notify{
-            title = "Debug",
-            text  = "Count: " .. count .. "\nFact: " .. fact,
-        }
-        for _,c  in ipairs(tag:clients()) do
-            awful.client.setwfact(fact, c)
-        end
-        ::exit::
     end,
-              { description = "decrease the number of columns",        group = "layout functions" }),
+              { description = "reset the layout status",               group = "layout functions" }),
 })
 
 -- Layout selection
@@ -209,7 +186,7 @@ awful.keyboard.append_global_keybindings({
               { description = "centered master", group = "layout" }),
     awful.key({ modkey,           }, "m", function() awful.layout.set(awful.layout.suit.max)             end,
               { description = "monocle",         group = "layout" }),
-    awful.key({ modkey, "Control" }, "f", function() awful.layout.set(awful.layout.suit.floating)        end,
+    awful.key({ modkey, "Shift"   }, "f", function() awful.layout.set(awful.layout.suit.floating)        end,
               { description = "floating",        group = "layout" }),
 })
 
@@ -260,17 +237,19 @@ client.connect_signal("request::default_keybindings", function()
                 end
             end,
                   { description = "close all other clients",   group = "client" }),
-        awful.key({ modkey,           }, "q",      function(c) c:kill()                               end,
+        awful.key({ modkey,           }, "q",     function(c) c:kill()                               end,
                   { description = "close",                     group = "client" }),
-        awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
+        awful.key({ modkey, "Control" }, "f",     awful.client.floating.toggle,
                   { description = "toggle floating",           group = "client" }),
-        awful.key({ modkey,           }, "space",  function(c) c:swap(awful.client.getmaster())       end,
+        awful.key({ modkey,           }, "space", function() client.focus = awful.client.getmaster() end,
+                  { description = "select master",             group = "client" }),
+        awful.key({ modkey, "Mod1"    }, "space", function(c) awful.client.setmaster(c)              end,
                   { description = "move to master",            group = "client" }),
-        awful.key({ modkey, "Control" }, "]",      function(c) c:move_to_screen( c.screen.index + 1 ) end,
+        awful.key({ modkey, "Control" }, "]",     function(c) c:move_to_screen( c.screen.index + 1 ) end,
                   { description = "move to screen",            group = "client" }),
-        awful.key({ modkey, "Control" }, "[",      function(c) c:move_to_screen( c.screen.index - 1 ) end,
+        awful.key({ modkey, "Control" }, "[",     function(c) c:move_to_screen( c.screen.index - 1 ) end,
                   { description = "move to screen",            group = "client" }),
-        awful.key({ modkey,           }, "t",      function(c) c.ontop = not c.ontop                  end,
+        awful.key({ modkey,           }, "t",     function(c) c.ontop = not c.ontop                  end,
                   { description = "toggle keep on top",        group = "client" }),
         awful.key({ modkey,           }, "m",
             function (c)
@@ -280,3 +259,32 @@ client.connect_signal("request::default_keybindings", function()
                   { description = "(un)maximize",              group = "client" }),
     })
 end)
+
+
+
+----<< EXTRA >>----
+
+-- Test for resetting the window factor:
+-- count = 0
+-- for _ in pairs(tag:clients()) do count = count + 1 end
+-- fact = 1 / (count - 1)
+-- if ( count < 2 ) then
+--     naughty.notify{
+--         title = "Warning",
+--         text  = "Didn't reset wfact since there aren't enough windows",
+--     }
+--     goto exit
+-- end 
+-- prior_wfact = tag.windowfact[1][2]
+-- naughty.notify{
+--     title = "Debug",
+--     text  = "Starting wfact: " .. prior_wfact
+-- }
+-- naughty.notify{
+--     title = "Debug",
+--     text  = "Count: " .. count .. "\nFact: " .. fact,
+-- }
+-- for _,c  in ipairs(tag:clients()) do
+--     awful.client.setwfact(fact, c)
+-- end
+-- ::exit::
