@@ -30,11 +30,13 @@ awful.keyboard.append_global_keybindings({
               { description = "reload awesome",    group = "awesome" }),
     awful.key({ modkey, "Control", "Shift" }, "q",      awesome.quit,
               { description = "quit awesome",      group = "awesome" }),
-    awful.key({ modkey,           }, "Return", function() awful.spawn(terminal) end,
+    awful.key({ modkey,           }, "Return", function() awful.spawn(terminal)      end,
               { description = "open a terminal",   group = "launcher" }),
-    awful.key({ modkey,           }, "w",      function() awful.spawn(browser)  end,
+    awful.key({ modkey,           }, "w",      function() awful.spawn(browser)       end,
               { description = "open the browser",  group = "launcher" }),
-    awful.key({ modkey            }, "p",      function() awful.spawn(launcher)     end,
+    awful.key({ modkey,           }, "e",      function() awful.spawn(explorer_cmd)  end,
+              { description = "open the browser",  group = "launcher" }),
+    awful.key({ modkey            }, "p",      function() awful.spawn(launcher)      end,
               { description = "show app launcher", group = "launcher" }),
 })
 
