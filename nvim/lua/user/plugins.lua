@@ -1,70 +1,112 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd [[packadd packer.nvim]]
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
-return require('packer').startup( {function()
+local packer_bootstrap = ensure_packer()
 
-    --<< Packer
-    use 'wbthomason/packer.nvim'            -- Plugin manager
+return require("packer").startup({
 
-    --<< Treesitter
-    use 'nvim-treesitter/nvim-treesitter'   -- Syntax highlighting
-    use 'nvim-treesitter/playground'        -- Treesitter informations in Neovim
+    function(use)
+        --<< Packer
+        use "wbthomason/packer.nvim"                        -- Plugin manager
 
-    --<< Lsp
-    use 'neovim/nvim-lspconfig'             -- Defaults for LSP
+        --<< Highlighting
+        use { "nvim-treesitter/nvim-treesitter",            -- Syntax highlighting
+            config = function() require("user.configs.treesitter") end,
+        }
+        use { "nvim-treesitter/playground",                 -- Treesitter informations in Neovim
+            requires = "nvim-treesitter/nvim-treesitter",
+        }
+        use "folke/lsp-colors.nvim"
 
-    --<< Navigation
-    use 'preservim/nerdtree'                -- Nerdtree file navigation
+        --<< LSP and diagnostics
+        use { "williamboman/mason.nvim",                     -- Automate installation of LSP servers
+            config = function() require("user.configs.mason") end,
+        }
+        use { "williamboman/mason-lspconfig.nvim",          -- Bridges the two plugins above
+            config = function() require("user.configs.mason-lspconfig") end,
+        }
+        use "neovim/nvim-lspconfig"                         -- Defaults for LSP
+        use { "folke/trouble.nvim",                         -- List of diagnostics
+            requires = "kyazdani42/nvim-web-devicons",
+            config = function() require("trouble").setup() end,
+        }
 
-    --<< Completion
-    use 'hrsh7th/nvim-cmp'                  -- Completion plugin
-    use 'hrsh7th/cmp-buffer'                -- Completion for buffer
-    use 'hrsh7th/cmp-path'                  -- Completion for paths
-    use 'hrsh7th/cmp-cmdline'               -- Completion for command line
-    use 'saadparwaiz1/cmp_luasnip'          -- Luasnip integration
+        --<< Navigation
+        use "preservim/nerdtree"                            -- Nerdtree file navigation
 
-    --<< Snippets
-    use "L3MON4D3/LuaSnip"                  -- Snippet engine
-    use "rafamadriz/friendly-snippets"      -- Additional snippets
+        --<< Completion
+        use { "hrsh7th/nvim-cmp",                           -- Completion plugin
+            config = function() require("user.configs.cmp-lunar") end,
+        }
+        use "hrsh7th/cmp-nvim-lsp"                          -- Completion integration with LSP
+        use "hrsh7th/cmp-buffer"                            -- Completion for buffer
+        use "hrsh7th/cmp-path"                              -- Completion for paths
+        use "hrsh7th/cmp-cmdline"                           -- Completion for command line
+        use "kdheepak/cmp-latex-symbols"                    -- Completion for LaTeX symbols
+        use "chrisgrieser/cmp-nerdfont"                     -- Completion for Nerd Fonts characters
+        use "petertriho/cmp-git"                            -- Completion for git informations
+        use "saadparwaiz1/cmp_luasnip"                      -- Luasnip integration
 
-    --<< Git
-    use 'tpope/vim-fugitive'                -- Git tools inside neovim
+        --<< Snippets
+        use { "L3MON4D3/LuaSnip",                           -- Snippet engine
+            config = function() require("luasnip.loaders.from_vscode").lazy_load() end
+        }
+        use "rafamadriz/friendly-snippets"                  -- Additional snippets
 
-    --<< Pairs and brackets
-    use 'jiangmiao/auto-pairs'              -- Generate final bracket automatically
-    use 'tpope/vim-surround'                -- Manipulate brackets and other delimiters
-    use 'tpope/vim-repeat'                  -- More advanced repeating with dot
-    --use 'alvan/vim-closetag'              -- Manipulate html tags
+        --<< Git
+        use "tpope/vim-fugitive"                            -- Git tools inside neovim
 
-    --<< Utilities
-    use 'lambdalisue/suda.vim'              -- Edit with su permission maintaining personal configuration
-    use 'norcalli/nvim-colorizer.lua'       -- Colorful hex codes
-    use 'fladson/vim-kitty'                 -- Kitty conf file syntax highlighting
+        --<< Pairs and brackets
+        use "jiangmiao/auto-pairs"                          -- Generate final bracket automatically
+        use "tpope/vim-surround"                            -- Manipulate brackets and other delimiters
+        use "tpope/vim-repeat"                              -- More advanced repeating with dot
+        use { "alvan/vim-closetag",                         -- Manipulate html tags
+            ft = { "html" }
+        }
 
-    --<< Theming and customizing
-    use 'nvim-lualine/lualine.nvim'        -- Custom statusline written in Lua
-    use 'kyazdani42/nvim-web-devicons'     -- Custom icons for neovim
-    use 'Mofiqul/dracula.nvim'              -- Dracula Neovim theme
+        --<< Utilities
+        use { "lambdalisue/suda.vim",                       -- Edit with su permission maintaining personal configuration
+            config = function() require("user.configs.suda") end,
+        }
+        use { "norcalli/nvim-colorizer.lua",                -- Colorful hex codes
+            config = function() require("user.configs.colorizer") end,
+        }
+        use "fladson/vim-kitty"                             -- Kitty conf file syntax highlighting
 
-    --<< Deactivated
-    --use 'glepnir/dashboard-nvim'
-    --use {
-    --    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    --    requires = {
-    --        'nvim-lua/plenary.nvim',
-    --        'kyazdani42/nvim-web-devicons',
-    --    }
-    --}  
+        --<< Theming and customizing
+        use { "nvim-lualine/lualine.nvim",                  -- Custom statusline written in Lua
+            requires = { "kyazdani42/nvim-web-devicons" },  -- Custom icons for neovim
+            config = function() require("user.configs.lualine") end,
+        }
+        use { "Mofiqul/dracula.nvim",                       -- Dracula Neovim theme
+            config = function() require("user.configs.dracula") end,
+        }
+        use { "folke/tokyonight.nvim",                      -- Tokyonight Neovim theme
+            config = function() require("user.configs.tokyonight") end,
+        }
 
-end,
-config = {
-    display = {
-        open_fn = require('packer.util').float--({border = 'single'})
-    }
-},
-run = ':TSUpdate',
+        --<< Deactivated
+        -- use "glepnir/dashboard-nvim"                        -- Customize the opening screen
+        -- use "hrsh7th/cmp-emoji"                             -- Completion for emojis
+
+        -- Run PackerSync if bootstrapped
+        if packer_bootstrap then
+            require("packer").sync()
+        end
+    end,
+    config = {
+        display = {
+            open_fn = function()
+                return require("packer.util").float({border = "single"})
+            end
+        }
+    },
 })

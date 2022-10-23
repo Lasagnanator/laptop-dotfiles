@@ -24,9 +24,3 @@ local settings = {
 for k, v in pairs(settings) do
     vim.opt[k] = v
 end
-
-vim.cmd [[
-    colorscheme dracula
-    highlight Normal guibg=none cterm=none
-    highlight NonText guibg=none cterm=none
-]]
