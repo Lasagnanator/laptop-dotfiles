@@ -13,14 +13,14 @@ local bling         = require("bling")
 
 -- Variables
 local global = require("configs.global")
-modkey       = global.modkey
-terminal     = global.terminal
-browser      = global.browser
-editor       = global.editor
-launcher     = global.launcher
-explorer     = global.explorer
-editor_cmd   = global.editor_cmd
-explorer_cmd = global.explorer_cmd
+local modkey       = global.modkey
+local terminal     = global.terminal
+local browser      = global.browser
+local editor       = global.editor
+local launcher     = global.launcher
+local explorer     = global.explorer
+local editor_cmd   = global.editor_cmd
+local explorer_cmd = global.explorer_cmd
 
 -- General keybinds
 awful.keyboard.append_global_keybindings({
@@ -103,6 +103,7 @@ awful.keyboard.append_global_keybindings({
                 for _,c in ipairs(orig_tag2_clients) do
                     c:move_to_tag(tag)
                 end
+                tag2:view_only()
             end
         end
     },

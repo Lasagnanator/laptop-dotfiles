@@ -32,13 +32,13 @@ local lain          = require("lain")
 
 -- {{{ Variables
 local global = require("configs.global")
-modkey = global.modkey
-terminal = global.terminal
-browser = global.browser
-editor = global.editor
-explorer = global.explorer
-editor_cmd = global.editor_cmd
-explorer_cmd = global.explorer_cmd
+local modkey = global.modkey
+local terminal = global.terminal
+local browser = global.browser
+local editor = global.editor
+local explorer = global.explorer
+local editor_cmd = global.editor_cmd
+local explorer_cmd = global.explorer_cmd
 -- }}}
 
 -- {{{ Theme definition
