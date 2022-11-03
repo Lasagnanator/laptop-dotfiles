@@ -1,3 +1,4 @@
+*/.vscode/*
 AliceVision/
 BetterDiscord Installer/
 blender/
@@ -12,7 +13,9 @@ dooit/
 dwm-extra/
 Electron/ 
 flameshot/
+GIMP/
 GitKraken/
+Google/
 gtk-2.0/
 gtk-3.0/
 htop/
@@ -20,6 +23,8 @@ lsp-plugins/
 lutris/
 mimeapps.list
 notion-app/
+nvim/lua/user/configs/old/
+nvim/plugin/
 nvtop/
 obsidian/
 onlyoffice/
@@ -29,3 +34,4 @@ rua/
 spotify/
 unity3d/
 unityhub/
+vlc/
