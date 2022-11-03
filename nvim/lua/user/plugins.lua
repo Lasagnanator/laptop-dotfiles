@@ -27,13 +27,15 @@ return require("packer").startup({
         use "folke/lsp-colors.nvim"
 
         --<< LSP and diagnostics
-        use { "williamboman/mason.nvim",                     -- Automate installation of LSP servers
+        use { "williamboman/mason.nvim",                    -- Automate installation of LSP servers
             config = function() require("user.configs.mason") end,
         }
-        use { "williamboman/mason-lspconfig.nvim",          -- Bridges the two plugins above
+        use { "williamboman/mason-lspconfig.nvim",          -- Bridges the two plugins
             config = function() require("user.configs.mason-lspconfig") end,
         }
-        use "neovim/nvim-lspconfig"                         -- Defaults for LSP
+        use { "neovim/nvim-lspconfig",                      -- Defaults for LSP
+            config = function() require("user.configs.lspconfig") end
+        }
         use { "folke/trouble.nvim",                         -- List of diagnostics
             requires = "kyazdani42/nvim-web-devicons",
             config = function() require("trouble").setup() end,
@@ -44,7 +46,8 @@ return require("packer").startup({
 
         --<< Completion
         use { "hrsh7th/nvim-cmp",                           -- Completion plugin
-            config = function() require("user.configs.cmp-lunar") end,
+            requires = "kyazdani42/nvim-web-devicons",
+            config = function() require("user.configs.cmp") end,
         }
         use "hrsh7th/cmp-nvim-lsp"                          -- Completion integration with LSP
         use "hrsh7th/cmp-buffer"                            -- Completion for buffer
@@ -52,8 +55,14 @@ return require("packer").startup({
         use "hrsh7th/cmp-cmdline"                           -- Completion for command line
         use "kdheepak/cmp-latex-symbols"                    -- Completion for LaTeX symbols
         use "chrisgrieser/cmp-nerdfont"                     -- Completion for Nerd Fonts characters
+        use "hrsh7th/cmp-emoji"                             -- Completion for emojis
         use "petertriho/cmp-git"                            -- Completion for git informations
         use "saadparwaiz1/cmp_luasnip"                      -- Luasnip integration
+
+        --<< Comments
+        use { "numToStr/Comment.nvim",                      -- Easier commenting
+            config = function() require("user.configs.comment") end,
+        }
 
         --<< Snippets
         use { "L3MON4D3/LuaSnip",                           -- Snippet engine
@@ -79,7 +88,8 @@ return require("packer").startup({
         use { "norcalli/nvim-colorizer.lua",                -- Colorful hex codes
             config = function() require("user.configs.colorizer") end,
         }
-        use "fladson/vim-kitty"                             -- Kitty conf file syntax highlighting
+        use "b0o/schemastore.nvim"                          -- JSON schemas downloader for JSON LSP
+        use "fladson/vim-kitty"                             -- Kitty.conf file syntax highlighting
 
         --<< Theming and customizing
         use { "nvim-lualine/lualine.nvim",                  -- Custom statusline written in Lua
@@ -91,6 +101,9 @@ return require("packer").startup({
         }
         use { "folke/tokyonight.nvim",                      -- Tokyonight Neovim theme
             config = function() require("user.configs.tokyonight") end,
+        }
+        use { "lunarvim/synthwave84.nvim",
+            config = function() require("user.configs.synthwave84") end,
         }
 
         --<< Deactivated
@@ -105,7 +118,7 @@ return require("packer").startup({
     config = {
         display = {
             open_fn = function()
-                return require("packer.util").float({border = "single"})
+                return require("packer.util").float({border = "none"})
             end
         }
     },
