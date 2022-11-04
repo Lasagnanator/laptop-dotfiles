@@ -19,7 +19,7 @@ return require("packer").startup({
 
         --<< Highlighting
         use { "nvim-treesitter/nvim-treesitter", -- Syntax highlighting
-            config = function() require("user.configs.treesitter") end,
+            -- config = function() require("user.configs.treesitter") end,
         }
         use { "nvim-treesitter/playground", -- Treesitter informations in Neovim
             requires = "nvim-treesitter/nvim-treesitter",
@@ -28,15 +28,15 @@ return require("packer").startup({
 
         --<< LSP and diagnostics
         use { "williamboman/mason.nvim", -- Automate installation of LSP servers
-            config = function() require("user.configs.mason") end,
+            -- config = function() require("user.configs.mason") end,
         }
         use { "williamboman/mason-lspconfig.nvim", -- Bridges the two plugins
-            config = function() require("user.configs.mason-lspconfig") end,
+            -- config = function() require("user.configs.mason-lspconfig") end,
         }
         use "neovim/nvim-lspconfig" -- Defaults for LSP
         use { "folke/trouble.nvim", -- List of diagnostics
             requires = "kyazdani42/nvim-web-devicons",
-            config = function() require("trouble").setup() end,
+            -- config = function() require("trouble").setup() end,
         }
 
         --<< Navigation
@@ -45,7 +45,7 @@ return require("packer").startup({
         --<< Completion
         use { "hrsh7th/nvim-cmp", -- Completion plugin
             requires = "kyazdani42/nvim-web-devicons",
-            config = function() require("user.configs.cmp") end,
+            -- config = function() require("user.configs.cmp") end,
         }
         use "hrsh7th/cmp-nvim-lsp" -- Completion integration with LSP
         use "hrsh7th/cmp-buffer" -- Completion for buffer
@@ -59,12 +59,12 @@ return require("packer").startup({
 
         --<< Comments
         use { "numToStr/Comment.nvim", -- Easier commenting
-            config = function() require("user.configs.comment") end,
+            -- config = function() require("user.configs.comment") end,
         }
 
         --<< Snippets
         use { "L3MON4D3/LuaSnip", -- Snippet engine
-            config = function() require("luasnip.loaders.from_vscode").lazy_load() end
+            -- config = function() require("luasnip.loaders.from_vscode").lazy_load() end
         }
         use "rafamadriz/friendly-snippets" -- Additional snippets
 
@@ -81,10 +81,10 @@ return require("packer").startup({
 
         --<< Utilities
         use { "lambdalisue/suda.vim", -- Edit with su permission maintaining personal configuration
-            config = function() require("user.configs.suda") end,
+            -- config = function() require("user.configs.suda") end,
         }
         use { "norcalli/nvim-colorizer.lua", -- Colorful hex codes
-            config = function() require("user.configs.colorizer") end,
+            -- config = function() require("user.configs.colorizer") end,
         }
         use "b0o/schemastore.nvim" -- JSON schemas downloader for JSON LSP
         use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
@@ -92,16 +92,16 @@ return require("packer").startup({
         --<< Theming and customizing
         use { "nvim-lualine/lualine.nvim", -- Custom statusline written in Lua
             requires = { "kyazdani42/nvim-web-devicons" }, -- Custom icons for neovim
-            config = function() require("user.configs.lualine") end,
+            -- config = function() require("user.configs.lualine") end,
         }
         use { "Mofiqul/dracula.nvim", -- Dracula Neovim theme
-            config = function() require("user.configs.dracula") end,
+            -- config = function() require("user.configs.dracula") end,
         }
         use { "folke/tokyonight.nvim", -- Tokyonight Neovim theme
-            config = function() require("user.configs.tokyonight") end,
+            -- config = function() require("user.configs.tokyonight") end,
         }
         use { "lunarvim/synthwave84.nvim", -- Synthwave '84 Neovim theme
-            config = function() require("user.configs.synthwave84") end,
+            -- config = function() require("user.configs.synthwave84") end,
         }
 
         --<< Deactivated
