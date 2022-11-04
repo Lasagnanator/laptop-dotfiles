@@ -54,10 +54,15 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({ -- Keybinds
         ["<C-k>"]     = cmp.mapping.select_prev_item(),
         ["<C-j>"]     = cmp.mapping.select_next_item(),
-        ['<C-b>']     = cmp.mapping.scroll_docs(-2),
-        ['<C-f>']     = cmp.mapping.scroll_docs(2),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ["<C-e>"]     = cmp.mapping.abort(),
+        ["<C-b>"]     = cmp.mapping.scroll_docs(-2),
+        ["<C-f>"]     = cmp.mapping.scroll_docs(2),
+        ["<C-Space>"] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.abort()
+            else
+                cmp.complete()
+            end
+        end, { "i", "s" }),
         ["<CR>"]      = cmp.mapping.confirm({ select = false }), -- False requires selection, true autoselects first result
         ["<Tab>"]     = cmp.mapping(function(fallback)
             if cmp.visible() then
