@@ -1,4 +1,4 @@
---<< MASON LSPCONFIG >>--
+--<< LSPCONFIG (ALL PLUGINS) >>--
 
 --<< Protected calls
 local mason_lsp_status, mason_lsp = pcall(require, "mason-lspconfig")
@@ -17,6 +17,7 @@ local on_attach = function(client, bufnr)
   --<< Vars
   local keymap  = vim.keymap.set
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
   --<< Mappings
   keymap("n", "<Leader>le",  vim.diagnostic.open_float,           bufopts)
   keymap("n", "<C-[>",       vim.diagnostic.goto_prev,            bufopts)
