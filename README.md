@@ -1,33 +1,32 @@
-# Laptop's .dotfiles
-Dotfiles from my Linux installations
+# Lasagna's wasted time and effort
+You, a normal person:
+"Nooooo you can't spend all your free time on ricing every pointless thing on your laptop!"
+
+Me, enlightened by the Way Of The Vim, Master of the Tile and Hater of the Rodent:
+"AHAHAHAHA COLORFUL LINUX GO BRRRRR"
 
 ## Dependencies
 
-    +dwm, lasagna edition (included as submodule)
-        +yajl
-    +polybar dwm module (included as submodule)
-        +pacman-contrib
-        +playerctl
-        +zscroll
-        +stalonetray
+    +Awesome, git version possibly
     +picom
     +feh
     +rofi
-    +kitty (not necessary, st included)
+    +kitty
     +interception-tools
     +interception-dual-function-keys
     +firefox
-    +vim/neovim
+    +neovim (<=0.7)
     +ranger
     +tmux (?)
-    +noto-fonts (or another monospace font)
+    +fira code font (or another monospace font)
     +adobe-source-han-sans-otc-fonts
-    +noto nerd fonts (or equivalent) 
+    +symbol-only nerd fonts (or equivalent) 
     +xbacklight or equivalent
     +pipewire, with compatibility packages for alsa, jack and pulseaudio (important)
-    +zsh (?)
+
+There will be others, the list is incomplete, deal with it for the time being. If you get an error... Well, that's what you get in early access.
     
-## Interception and Dual Function Keys
+<!-- ## Interception and Dual Function Keys
 Configure /etc/interception/dual-function-keys/modifiers.yaml as:
 
     TIMING:
@@ -69,4 +68,4 @@ and /etc/interception/udevmon.d/keyboard.yaml as:
         EVENTS:
           EV_KEY: [KEY_CAPSLOCK, KEY_TAB, KEY_LEFTALT, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_BACKSLASH, KEY_SPACE]
 
-in case of doubt, consult the gitlab page of interception.
+in case of doubt, consult the gitlab page of interception. -->
