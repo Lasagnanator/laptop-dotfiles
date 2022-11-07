@@ -6,4 +6,3 @@ require("lsp_signature").setup({
     border = "none",
   },
 })
-
