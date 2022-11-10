@@ -1,11 +1,6 @@
---<< MASON >>--
+--<< LSPCONFIG (ALL PLUGINS) >>--
 
 --<< Protected calls
-local mason_status, mason = pcall(require, "mason")
-if not mason_status then
-    return
-end
-
 local mason_lsp_status, mason_lsp = pcall(require, "mason-lspconfig")
 if not mason_lsp_status then
     return
@@ -16,27 +11,14 @@ if not lspconfig_status then
     return
 end
 
---<< Mason settings
-mason.setup({
-    ui = {
-        -- border = "single",
-        icons = {
-            package_installed = " ",
-            package_pending = "➜ ",
-            package_uninstalled = " "
-        }
-    }
-})
-
---<< On-attach function
+--<<Keybinds to attach to buffer when LSP is loaded
 ---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
-
-    -- Vars
+    --<< Vars
     local keymap  = vim.keymap.set
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-    -- Mappings
+    --<< Mappings
     keymap("n", "<Leader>le",  vim.diagnostic.open_float,                    bufopts)
     keymap("n", "<C-[>",       vim.diagnostic.goto_prev,                     bufopts)
     keymap("n", "<C-]>",       vim.diagnostic.goto_next,                     bufopts)
@@ -62,21 +44,19 @@ local on_attach = function(client, bufnr)
     end, bufopts)
 end
 
---<< Mason-lsp settings
+--<< Settings
 mason_lsp.setup({
     ensure_installed = { "sumneko_lua", "bashls", "pyright" }, -- If not found, download and install declared LSPs
 })
 
 --<< LSP servers setup (handlers)
 mason_lsp.setup_handlers({
-
     -- Default handler
     function(server_name)
         lspconfig[server_name].setup({
             on_attach = on_attach
         })
     end,
-
     -- Personalized handlers
     ["sumneko_lua"] = function()
         lspconfig.sumneko_lua.setup({
