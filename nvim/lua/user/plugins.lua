@@ -39,12 +39,14 @@ return require("packer").startup({
         use { "nvim-tree/nvim-tree.lua", -- File navigation
             requires = "kyazdani42/nvim-web-devicons",
         }
-        use { "nvim-telescope/telescope.nvim", -- File finder with many filters
+        use { "nvim-telescope/telescope.nvim", -- File finder with filters
             requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
         }
         use { "nvim-telescope/telescope-fzf-native.nvim", -- fzf integration for Telescope
             run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         }
+        use "nvim-telescope/telescope-file-browser.nvim" -- File browser extension for Telescope
+        use "nvim-telescope/telescope-ui-select.nvim" -- Use Telescope
 
         --<< Completion
         use { "hrsh7th/nvim-cmp", -- Completion plugin
@@ -64,9 +66,6 @@ return require("packer").startup({
         use "L3MON4D3/LuaSnip" -- Snippet engine
         use "rafamadriz/friendly-snippets" -- Additional snippets
 
-        --<< Comments
-        use "numToStr/Comment.nvim" -- Easier commenting
-
         --<< Git
         use "tpope/vim-fugitive" -- Git tools inside neovim
 
@@ -79,12 +78,18 @@ return require("packer").startup({
         }
 
         --<< Utilities
+        use { "Shatur/neovim-session-manager", -- Automatic session manager
+            requires = { "nvim-lua/plenary.nvim" }
+        }
+        use "stevearc/dressing.nvim" -- Interface for input prompts
+        use "numToStr/Comment.nvim" -- Easier commenting
         use "lambdalisue/suda.vim" -- Edit with su permission maintaining personal configuration
         use "norcalli/nvim-colorizer.lua" -- Colorful hex codes
         use "b0o/schemastore.nvim" -- JSON schemas downloader for JSON LSP
         use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
 
         --<< Theming and customizing
+        use "glepnir/dashboard-nvim" -- Customize the opening screen
         use { "nvim-lualine/lualine.nvim", -- Custom statusline written in Lua
             requires = { "kyazdani42/nvim-web-devicons" }, -- Custom icons for neovim
         }
@@ -93,7 +98,6 @@ return require("packer").startup({
         use "lunarvim/synthwave84.nvim" -- Synthwave '84 Neovim theme
 
         --<< Deactivated
-        -- use "glepnir/dashboard-nvim" -- Customize the opening screen
         -- use "hrsh7th/cmp-emoji" -- Completion for emojis
         -- use "kristijanhusak/vim-dadbod-completion" -- Completion for database interactions
         -- use "epwalsh/obsidian.nvim" -- Write and Navigate Obsidian vaults
