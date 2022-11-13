@@ -32,8 +32,8 @@ keymap( "n", "<Leader>@",     ":set cursorcolumn!<CR>",  silent )
 keymap( "n", "<S-k>",         "k<S-j>",                  silent )
 
 --<< Window management
-keymap( "n", "<Leader>v",     ":vsplit ",                nosilent )
-keymap( "n", "<Leader>s",     ":split ",                 nosilent )
+-- keymap( "n", "<Leader>v",     ":vsplit ",                nosilent )
+-- keymap( "n", "<Leader>s",     ":split ",                 nosilent )
 keymap( "n", "<Leader>o",     "<C-W>o",                  silent )
 keymap( "n", "<Leader><bar>", "<C-W><bar>",              silent )
 keymap( "n", "<Leader>_",     "<C-W>_",                  silent )
@@ -57,7 +57,7 @@ keymap( "n", "<C-Up>",        ":resize +1<CR>",          silent )
 keymap( "n", "<C-Down>",      ":resize -1<CR>",          silent )
 
 --<< Tabs
-keymap( "n", "<Leader>t",     ":tabnew ",                silent )
+-- keymap( "n", "<Leader>t",     ":tabnew ",                silent )
 keymap( "n", "<C-.>",         ":tabnext<CR>",            silent )
 keymap( "n", "<C-,>",         ":tabprevious<CR>",        silent )
 keymap( "n", "<A-.>",         ":+tabmove<CR>",           silent )
@@ -68,7 +68,7 @@ keymap( "n", "<C-p>c",        ":PackerCompile<CR>\
                                :PackerInstall<CR>",      nosilent )
 keymap( "n", "<C-p>u",        ":PackerSync<CR>\
                                :TSUpdate<CR>",           nosilent )
-keymap( "n", "<Leader>lm",    ":Mason<CR>",              silent )
+keymap( "n", "<Leader>lm",    ":Mason<CR>",              nosilent )
 keymap( "n", "<Leader>ff",    builtin.find_files,        silent )
 keymap( "n", "<Leader>fl",    builtin.live_grep,         silent )
 keymap( "n", "<Leader>fb",    builtin.buffers,           silent )
