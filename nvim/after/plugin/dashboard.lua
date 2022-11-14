@@ -8,7 +8,7 @@ end
 
 --<< Settings
 dashboard.preview_command = "cat | lolcat -F 0.3"
-dashboard.preview_file_path = "../nvim-headers/skull.txt"
+dashboard.preview_file_path = vim.fn.expand(vim.fn.stdpath("config") .. "/nvim-headers/skull.txt")
 dashboard.preview_file_height = 18
 dashboard.preview_file_width = 75
 
