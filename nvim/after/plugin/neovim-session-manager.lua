@@ -11,6 +11,10 @@ if not plenary_status then
     return
 end
 
+--<<Vars
+local keymap   = vim.keymap.set
+local silent   = { noremap = true, silent = true }
+
 --<< Settings
 session_manager.setup({
     sessions_dir               = plenary_path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
@@ -27,3 +31,10 @@ session_manager.setup({
     autosave_only_in_session   = false, -- Always autosaves session. If true, only autosaves after a session is active.
     max_path_length            = 80,  -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
 })
+
+--<< Keys
+
+keymap( "n", "<Leader>sl", ":SessionManager load_last_session<CR>",        silent )
+keymap( "n", "<Leader>sd", ":SessionManager load_current_dir_session<CR>", silent )
+keymap( "n", "<Leader>ss", ":SessionManager load_session<CR>",             silent )
+keymap( "n", "<Leader>sr", ":SessionManager delete_session<CR>",           silent )
