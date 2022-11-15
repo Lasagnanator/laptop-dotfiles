@@ -104,12 +104,6 @@ return require("packer").startup({
 
         --<< Deactivated
         -- use "hrsh7th/cmp-emoji" -- Completion for emojis
-        -- use "kristijanhusak/vim-dadbod-completion" -- Completion for database interactions
-        -- use "epwalsh/obsidian.nvim" -- Write and Navigate Obsidian vaults
-        -- use "preservim/tagbar" -- Open a list of components on the side
-        -- use "frioux/vim-lost" -- Plugin to check, not sure if useful
-        -- use "ray-x/navigator.lua" -- Makes code easier to navigate
-
 
         -- Run PackerSync if bootstrapped
         if packer_bootstrap then
