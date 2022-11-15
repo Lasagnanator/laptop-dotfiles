@@ -66,18 +66,8 @@ return require("packer").startup({
         use "L3MON4D3/LuaSnip" -- Snippet engine
         use "rafamadriz/friendly-snippets" -- Additional snippets
 
-        --<< Git
-        use "tpope/vim-fugitive" -- Git tools inside neovim
-
-        --<< Pairs and brackets
-        use "jiangmiao/auto-pairs" -- Generate final bracket automatically
-        use "tpope/vim-surround" -- Manipulate brackets and other delimiters
-        use "tpope/vim-repeat" -- More advanced repeating with dot
-        use { "alvan/vim-closetag", -- Manipulate html tags
-            ft = { "html", "xhtml", "phtml", "markdown" }
-        }
-
         --<< Utilities
+        use "akinsho/toggleterm.nvim" -- Neovim's terminal wrapper
         use { "Shatur/neovim-session-manager", -- Automatic session manager
             requires = { "nvim-lua/plenary.nvim" }
         }
@@ -87,6 +77,21 @@ return require("packer").startup({
         use "norcalli/nvim-colorizer.lua" -- Colorful hex codes
         use "b0o/schemastore.nvim" -- JSON schemas downloader for JSON LSP
         use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
+
+        --<< Git
+        use "tpope/vim-fugitive" -- Git tools inside neovim
+        use "lewis6991/gitsigns.nvim" -- Git decorations
+        use { 'sindrets/diffview.nvim', -- Viewer for diffs and merge resolution
+            requires = { 'nvim-lua/plenary.nvim', "kyazdani42/nvim-web-devicons" }
+        }
+
+        --<< Pairs and brackets
+        use "jiangmiao/auto-pairs" -- Generate final bracket automatically
+        use "tpope/vim-surround" -- Manipulate brackets and other delimiters
+        use "tpope/vim-repeat" -- More advanced repeating with dot
+        use { "alvan/vim-closetag", -- Manipulate html tags
+            ft = { "html", "xhtml", "phtml", "markdown" }
+        }
 
         --<< Theming and customizing
         use "glepnir/dashboard-nvim" -- Customize the opening screen
