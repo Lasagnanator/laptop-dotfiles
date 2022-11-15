@@ -1,11 +1,14 @@
 --<< COLORSCHEME & THEMEING >>--
 
 --<< Selected colorscheme
-local colorscheme = "tokyonight-night"
+local colorscheme = "tokyonight"
 
---<< Manage error if colorscheme not found
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not status_ok then
+--<< Load colorscheme settings
+require("user.colorschemes." .. colorscheme)
+
+--<< Set colorscheme and manage errors
+local colorcheme_status, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+if not colorcheme_status then
     vim.notify("Colorscheme " .. colorscheme .. "not found, loading default")
     return
 end
