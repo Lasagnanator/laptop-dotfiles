@@ -19,43 +19,43 @@ dashboard.custom_footer = {
 
 dashboard.custom_center = {
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "New file                             ",
         shortcut = " N/A ",
         action = "DashboardNewFile"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "Restore last session                ",
         shortcut = "SPC s l",
         action = "SessionManager load_last_session"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "Restore directory session           ",
         shortcut = "SPC s d",
         action = "SessionManager load_current_dir_session"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "Search folder                       ",
         shortcut = "SPC f f",
         action = "Telescope find_files"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "Find word                           ",
         shortcut = "SPC f h",
         action = "Telescope live_grep"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "File browser                        ",
         shortcut = "SPC f e",
         action = "Telescope file_browser"
     },
     {
-        icon = "m   ",
+        icon = "   ",
         desc = "Quit Neovim                          ",
         shortcut = "SPC q",
         action = ":q!"
