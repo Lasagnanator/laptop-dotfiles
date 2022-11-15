@@ -1,3 +1,4 @@
 */.vscode/*
 nvim/lua/user/configs/old/
 nvim/plugin/
+nvim/sessions/
