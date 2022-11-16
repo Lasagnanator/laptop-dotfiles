@@ -10,51 +10,37 @@ end
 lualine.setup {
     options = {
         icons_enabled = true,
-        theme = "tokyonight",
-        component_separators = { left = "", right = ""},
-        section_separators = { left = "", right = ""},
+        theme = "auto",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {},
         always_divide_middle = true,
-        globalstatus = false,
+        globalstatus = true,
     },
     sections = {
-        lualine_a = {"mode"},
-        lualine_b = {"branch", "diff", "diagnostics"},
-        lualine_c = {"filename"},
-        lualine_x = {"encoding", "fileformat", "filetype"},
-        lualine_y = {"progress"},
-        lualine_z = {"location"}
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
+        lualine_x = {
+            "encoding",
+            { "fileformat",
+                symbols = {
+                    unix = " ", -- e712
+                    dos = " ",  -- e70f
+                    mac = " ",  -- e711
+                },
+            },
+            "filetype",
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "location" }
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {"filename"},
-        lualine_x = {"location"},
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
         lualine_y = {},
         lualine_z = {}
     },
-    tabline = {
-        lualine_a = {
-            {
-                "filename",
-                path = 1,
-            },
-        },
-        lualine_b = {
-            {
-                "tabs",
-                max_length = vim.o.columns / 3,
-                mode = 1,
-                tabs_color = {
-                    active = "lualine_b_inactive",
-                    inactive = "lualine_c_inactive",
-                },
-            },
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-    },
-    extensions = {}
 }

@@ -81,9 +81,10 @@ return require("packer").startup({
         --<< Git
         use "tpope/vim-fugitive" -- Git tools inside neovim
         use "lewis6991/gitsigns.nvim" -- Git decorations
-        use { 'sindrets/diffview.nvim', -- Viewer for diffs and merge resolution
-            requires = { 'nvim-lua/plenary.nvim', "kyazdani42/nvim-web-devicons" }
+        use { "sindrets/diffview.nvim", -- Viewer for diffs and merge resolution
+            requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" }
         }
+        --TODO: check which git plugins are really needed
 
         --<< Pairs and brackets
         use "jiangmiao/auto-pairs" -- Generate final bracket automatically
@@ -96,10 +97,13 @@ return require("packer").startup({
         --<< Theming and customizing
         use "glepnir/dashboard-nvim" -- Customize the opening screen
         use { "nvim-lualine/lualine.nvim", -- Custom statusline written in Lua
-            requires = { "kyazdani42/nvim-web-devicons" }, -- Custom icons for neovim
+            requires = { "kyazdani42/nvim-web-devicons" },
         }
-        use "Mofiqul/dracula.nvim" -- Dracula Neovim theme
+        use { "akinsho/bufferline.nvim", -- Custom bufferline/tagline written in lua
+            requires = { "kyazdani42/nvim-web-devicons" },
+        }
         use "folke/tokyonight.nvim" -- Tokyonight Neovim theme
+        use "Mofiqul/dracula.nvim" -- Dracula Neovim theme
         use "lunarvim/synthwave84.nvim" -- Synthwave '84 Neovim theme
 
         --<< Deactivated
