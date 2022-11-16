@@ -23,6 +23,17 @@ telescope.setup({
         find_files = {
             find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
         },
+        buffers = {
+        --TODO: check if a better map is possible
+            mappings = {
+                i = {
+                    ["<C-k>"] = "delete_buffer",
+                },
+                n = {
+                    ["<C-k>"] = "delete_buffer",
+                },
+            }
+        }
     },
 })
 
