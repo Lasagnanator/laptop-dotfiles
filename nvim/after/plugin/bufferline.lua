@@ -18,11 +18,22 @@ bufferline.setup({
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         tab_size = 20,
         diagnostics = "nvim_lsp", -- false or "nvim_lsp"
+        diagnostics_update_in_insert = false,
+        diagnostics_indicator = function(count, level)
+            local icon = level:match("error") and " " or " " -- Equivalent to a if with the match as a condition
+            return " " .. count .. icon
+        end,
+        custom_filter = function (buffer_number)
+            local ft = vim.bo[buffer_number].filetype
+            if ft ~= "NvimTree" and ft ~= "help" and ft~= "wiki" then
+                return true
+            end
+        end,
         offsets = {
             {
                 filetype = "NvimTree",
                 text = "Explorer",
-                highlight = "TabLineFill",
+                highlight = "TabLineSel",
                 text_align = "center",
                 separator = false,
             },
