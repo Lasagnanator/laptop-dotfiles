@@ -107,7 +107,8 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path.."default/background.png"
+-- theme.wallpaper = themes_path.."default/background.png"
+theme.wallpaper = "/home/lasagna/Pictures/Synthwave/Synthwave city.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -147,7 +148,15 @@ end)
 -- {{{ Bling
 -- theme.dont_swallow_classname_list = { "firefox", "Gimp", "Blender" } 
 -- theme.dont_swallow_filter_activated = true
-theme.parent_filter_list   = { "firefox", "Gimp", "Blender", "Lutris", "Unity" } -- class names list of parents that should not be swallowed
+theme.parent_filter_list   = {                              -- class names list of parents that should not be swallowed
+    "firefox",
+    "Gimp",
+    "Blender",
+    "Lutris",
+    "Unity",
+    "Virt-manager",
+    "code - oss",
+}
 theme.child_filter_list    = { "kitty" }                    -- class names list that should not swallow their parents
 theme.swallowing_filter    = true                           -- whether the filters above should be active
 

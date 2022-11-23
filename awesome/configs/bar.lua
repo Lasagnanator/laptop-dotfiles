@@ -1,55 +1,20 @@
--- -- awesome_mode: api-level=4:screen=on
--- -- If LuaRocks is installed, make sure that packages installed through it are
--- -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
--- pcall(require, "luarocks.loader")
--- 
+-- --<< Awesome's libraries
 -- -- Standard awesome library
--- local gears         = require("gears")
--- local awful         = require("awful")
--- -- require("awful.autofocus") -- [needed?]
+-- local awful = require("awful")
+-- local gears = require("gears")
+-- local gfs   = gears.filesystem
 -- -- Widget and layout library
--- local wibox         = require("wibox")
+-- local wibox = require("wibox")
 -- -- Theme handling library
--- local beautiful     = require("beautiful")
--- -- Notification library
--- local naughty       = require("naughty")
--- -- Declarative object management
--- local ruled         = require("ruled")
--- local menubar       = require("menubar")
--- local hotkeys_popup = require("awful.hotkeys_popup")
--- -- Enable hotkeys help widget for VIM and other apps
--- -- when client with a matching name is opened:
---                       require("awful.hotkeys_popup.keys")
--- 
--- -- {{{ Modules
--- local global = require("configs.global")
--- require("configs.widgets")
--- -- }}}
--- 
--- -- {{{ Variables
--- modkey = global.modkey
--- terminal = global.terminal
--- browser = global.browser
--- editor = global.editor
--- explorer = global.explorer
--- editor_cmd = global.editor_cmd
--- explorer_cmd = global.explorer_cmd
--- -- }}}
--- 
--- -- {{{ Wibar
--- -- Keyboard map indicator and switcher
--- mykeyboardlayout = awful.widget.keyboardlayout()
--- 
--- -- Create a textclock widget
--- mytextclock = wibox.widget.textclock()
---    
+--
+-- --<< Draw on the screen
 -- screen.connect_signal("request::desktop_decoration", function(s)
---     -- Each screen has its own tag table.
+--     -- Each screen has i own tag table.
 --     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
--- 
+--
 --     -- Create a promptbox for each screen
 --     s.mypromptbox = awful.widget.prompt()
--- 
+--
 --     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
 --     -- We need one layoutbox per screen.
 --     s.mylayoutbox = awful.widget.layoutbox {
@@ -61,29 +26,52 @@
 --             awful.button({ }, 5, function () awful.layout.inc( 1) end),
 --         }
 --     }
--- 
+--
+--     -- Icons for taglist
+--     local unfocus = gears.surface.load_uncached(gfs.get_configuration_dir() .. "pac-ghost.svg")
+--     local unfocus_icon = gears.color.recolor_image(unfocus, "#C2CFDB")
+--     local empty = gears.surface.load_uncached(gfs.get_configuration_dir() .. "pac-ghost.svg")
+--     local empty_icon = gears.color.recolor_image(empty, "#4C6070")
+--     local focus = gears.surface.load_uncached(gfs.get_configuration_dir() .. "pacman.svg")
+--     local focus_icon = gears.color.recolor_image(focus, "#f76a65")
+--
+--     local taglist_buttons = {
+--         awful.button({ }, 1, function(t) t:view_only() end),
+--         awful.button({ modkey }, 1, function(t)
+--             if client.focus then
+--                 client.focus:move_to_tag(t)
+--             end
+--         end),
+--         awful.button({ }, 3, awful.tag.viewtoggle),
+--         awful.button({ modkey }, 3, function(t)
+--             if client.focus then
+--                 client.focus:toggle_tag(t)
+--             end
+--         end),
+--         -- awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+--         -- awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
+--     }
+--
+--     --<< Function to update the tags
+--     local update_tags = function(self, c3)
+--         local tagicon = self:get_children_by_id("icon_role")[1]
+--         if c3.selected then
+--             tagicon.image = focus_icon
+--         elseif #c3:clients() == 0 then
+--             tagicon.image = empty_icon
+--         else
+--             tagicon.image = unfocus_icon
+--         end
+--     end
+--
 --     -- Create a taglist widget
 --     s.mytaglist = awful.widget.taglist {
 --         screen  = s,
 --         filter  = awful.widget.taglist.filter.all,
---         buttons = {
---             awful.button({ }, 1, function(t) t:view_only() end),
---             awful.button({ modkey }, 1, function(t)
---                                             if client.focus then
---                                                 client.focus:move_to_tag(t)
---                                             end
---                                         end),
---             awful.button({ }, 3, awful.tag.viewtoggle),
---             awful.button({ modkey }, 3, function(t)
---                                             if client.focus then
---                                                 client.focus:toggle_tag(t)
---                                             end
---                                         end),
---             awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
---             awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
---         }
+--         
+--         buttons = taglist_buttons,
 --     }
--- 
+--
 --     -- Create a tasklist widget
 --     s.mytasklist = awful.widget.tasklist {
 --         screen  = s,
@@ -97,32 +85,33 @@
 --             awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
 --         }
 --     }
--- 
+--
 --     -- Create the wibox
 --     s.mywibox = awful.wibar {
 --         position = "top",
 --         screen   = s,
 --         widget   = {
 --             layout = wibox.layout.align.horizontal,
+--             expand = "none",
 --             { -- Left widgets
 --                 layout = wibox.layout.fixed.horizontal,
 --                 s.mylayoutbox,
---                 -- mylauncher,
---                 -- s.mytaglist,
+--                 mylauncher,
 --                 s.mypromptbox,
 --             },
---             { -- Center widgets
---                 layout = wibox.layout.fixed.horizontal,
---                 s.mytaglist, -- Middle widget
+--             { -- Middle widget
+--                 layout = wibox.layout.align.horizontal,
+--                 expand = "none",
+--                 s.mytaglist,
+--                 -- s.mytasklist,
 --             },
 --             { -- Right widgets
 --                 layout = wibox.layout.fixed.horizontal,
 --                 -- mykeyboardlayout,
 --                 wibox.widget.systray(),
 --                 mytextclock,
---                 -- s.mylayoutbox,
 --             },
 --         }
 --     }
 -- end)
--- -- }}}
+--

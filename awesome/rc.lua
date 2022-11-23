@@ -1,10 +1,12 @@
+--<< AWESOME WM CONFIGURATION >>--
+
 -- awesome_mode: api-level=4:screen=on
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+
+--<< Luarocks call
 pcall(require, "luarocks.loader")
 
+--<< Awesome's libraries
 -- Standard awesome library
-local gears         = require("gears")
 local awful         = require("awful")
                       require("awful.autofocus") -- [needed?]
 -- Widget and layout library
@@ -15,44 +17,31 @@ local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 -- Declarative object management
 local ruled         = require("ruled")
-local menubar       = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
                       require("awful.hotkeys_popup.keys")
-local lain          = require("lain")
 -- Error handling
                       require("configs.error")
 
--- {{{ Modules
-               -- require("configs.widgets")
-               -- require("configs.bar")
-               -- require("configs.rules")
--- }}}
+--<< Modules
+-- require("configs.widgets")
+-- require("configs.bar")
+-- require("configs.rules")
 
--- {{{ Variables
+--<< Variables
 local global = require("configs.global")
 local modkey = global.modkey
-local terminal = global.terminal
-local browser = global.browser
-local editor = global.editor
-local explorer = global.explorer
-local editor_cmd = global.editor_cmd
-local explorer_cmd = global.explorer_cmd
--- }}}
 
--- {{{ Theme definition
+--<< Theme definition
 local theme_path = global.theme_path
 beautiful.init(theme_path)
--- }}}
 
--- {{{ Bling
+--<< Bling
 local bling = require("bling")
 bling.module.window_swallowing.start()
 require("configs.scratchpads")
--- }}}
 
--- {{{ Tag layout
+--<< Tag layout
 -- Table of layouts to cover with awful.layout.inc, order matters.
 tag.connect_signal("request::default_layouts", function()
     awful.layout.append_default_layouts({
@@ -77,9 +66,8 @@ tag.connect_signal("request::default_layouts", function()
         awful.layout.suit.floating,
     })
 end)
--- }}}
 
--- {{{ Wallpaper
+--<< Wallpaper
 screen.connect_signal("request::wallpaper", function(s)
     awful.wallpaper {
         screen = s,
@@ -97,23 +85,22 @@ screen.connect_signal("request::wallpaper", function(s)
         }
     }
 end)
--- }}}
 
--- {{{ Keybinds and buttons
+--<< Keybinds and buttons
 require("configs.keybindings")
 require("configs.buttons")
--- }}}
 
--- {{{ Wibar
+--<< Wibar
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+---@diagnostic disable-next-line: unused-local
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-   
+local mytextclock = wibox.widget.textclock()
+
 screen.connect_signal("request::desktop_decoration", function(s)
-    -- Each screen has its own tag table.
-    awful.tag({ "一", "二", "三", "四", "五", "六", "七", "八", "九" }, s, awful.layout.layouts[1])
+    -- Each screen has i own tag table.
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -137,16 +124,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
         buttons = {
             awful.button({ }, 1, function(t) t:view_only() end),
             awful.button({ modkey }, 1, function(t)
-                                            if client.focus then
-                                                client.focus:move_to_tag(t)
-                                            end
-                                        end),
+                if client.focus then
+                    client.focus:move_to_tag(t)
+                end
+            end),
             awful.button({ }, 3, awful.tag.viewtoggle),
             awful.button({ modkey }, 3, function(t)
-                                            if client.focus then
-                                                client.focus:toggle_tag(t)
-                                            end
-                                        end),
+                if client.focus then
+                    client.focus:toggle_tag(t)
+                end
+            end),
             -- awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
             -- awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
         }
@@ -216,15 +203,13 @@ screen.connect_signal("request::desktop_decoration", function(s)
         }
     }
 end)
--- }}}
 
--- {{{ Client management
+--<< Client management
 client.connect_signal("manage", function(c)
      if not awesome.startup then awful.client.setslave(c) end
 end)
--- }}}
-                                             
--- {{{ Rules
+
+--<< Rules
 -- Rules to apply to new clients.
 ruled.client.connect_signal("request::rules", function()
     -- All clients will match this rule.
@@ -262,9 +247,8 @@ ruled.client.connect_signal("request::rules", function()
         properties = { floating = true }
     }
 end)
--- }}}
 
--- {{{ Notifications
+--<< Notifications
 ruled.notification.connect_signal('request::rules', function()
     -- All notifications will match this rule.
     ruled.notification.append_rule {
@@ -279,7 +263,6 @@ end)
 naughty.connect_signal("request::display", function(n)
     naughty.layout.box { notification = n }
 end)
--- }}}
 
 -- Enable sloppy focus, so that focus follows mouse.
 --client.connect_signal("mouse::enter", function(c)
