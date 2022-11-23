@@ -7,22 +7,23 @@ Me, enlightened by the Way Of The Vim, Master of the Tile and Hater of the Roden
 
 ## Dependencies
 
-    +Awesome, git version possibly
-    +picom
-    +feh
-    +rofi
-    +kitty
-    +interception-tools
-    +interception-dual-function-keys
-    +firefox
-    +neovim (<=0.7)
-    +ranger
-    +tmux (?)
-    +fira code font (or another monospace font)
-    +adobe-source-han-sans-otc-fonts
-    +symbol-only nerd fonts (or equivalent) 
-    +xbacklight or equivalent
-    +pipewire, with compatibility packages for alsa, jack and pulseaudio (important)
+    - Awesome, git version possibly
+    - picom
+    - feh
+    - rofi
+    - kitty
+    - interception-tools
+    - interception-dual-function-keys
+    - firefox
+    - neovim (>=0.8)
+    - fd
+    - ranger
+    - tmux (?)
+    - fira code font (or another monospace font)
+    - adobe-source-han-sans-otc-fonts
+    - symbol-only nerd fonts (or equivalent) 
+    - xbacklight or equivalent
+    - pipewire and wireplumber, with compatibility packages for alsa and pulseaudio (important)
 
 There will be others, the list is incomplete, deal with it for the time being. If you get an error... Well, that's what you get in early access.
     
