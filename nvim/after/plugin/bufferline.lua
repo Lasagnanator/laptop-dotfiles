@@ -26,12 +26,13 @@ bufferline.setup({
         custom_filter = function (buffer_number)
             local ft = vim.bo[buffer_number].filetype
             if  ft ~= "NvimTree"
-            and ft ~= "help"
-            and ft ~= "wiki"
             and ft ~= "TelescopePrompt"
+            and ft ~= "DressingInput"
+            and ft ~= "Trouble"
             and ft ~= "mason"
             and ft ~= "packer"
-            and ft ~= "DressingInput"
+            and ft ~= "help"
+            and ft ~= "wiki"
             then
                 return true
             end
