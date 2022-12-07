@@ -38,8 +38,8 @@ local on_attach = function(client, bufnr)
 
     -- Mappings
     keymap("n", "<Leader>le",  vim.diagnostic.open_float,                    bufopts)
-    keymap("n", "<C-[>",       vim.diagnostic.goto_prev,                     bufopts)
-    keymap("n", "<C-]>",       vim.diagnostic.goto_next,                     bufopts)
+    keymap("n", "<C-,>",       vim.diagnostic.goto_prev,                     bufopts)
+    keymap("n", "<C-.>",       vim.diagnostic.goto_next,                     bufopts)
     keymap("n", "<Leader>lr",  vim.lsp.buf.rename,                           bufopts)
     keymap("n", "<Leader>ld",  function ()
         vim.lsp.buf.definition({
@@ -48,8 +48,8 @@ local on_attach = function(client, bufnr)
     end, bufopts)
     keymap("n", "<Leader>li",  vim.lsp.buf.hover,                            bufopts)
     keymap("n", "<Leader>lc",  vim.lsp.buf.code_action,                      bufopts)
-    keymap("n", "<Leader>ls",  vim.lsp.buf.references,                       bufopts)
-    keymap("n", "<Leader>lt",  ":Trouble<CR>",                               bufopts)
+    -- keymap("n", "<Leader>ls",  vim.lsp.buf.references,                       bufopts)
+    keymap("n", "<Leader>lt",  "<Cmd>Trouble<CR>",                               bufopts)
     keymap("n", "<Leader>lwa", vim.lsp.buf.add_workspace_folder,             bufopts)
     keymap("n", "<Leader>lwr", vim.lsp.buf.remove_workspace_folder,          bufopts)
     keymap("n", "<Leader>lwl", function ()
@@ -64,7 +64,7 @@ end
 
 --<< Mason-lsp settings
 mason_lsp.setup({
-    ensure_installed = { "sumneko_lua", "bashls", "pyright" }, -- If not found, download and install declared LSPs
+    ensure_installed = { "sumneko_lua", "bashls", "pyright" }, -- If not found, download and install declared LSPs "pylsp" "pyright"
 })
 
 --<< LSP servers setup (handlers)
@@ -114,6 +114,20 @@ mason_lsp.setup_handlers({
                     },
                 },
             },
+        })
+    end,
+    ["pylsp"] = function ()
+        lspconfig.pylsp.setup({
+            on_attach = on_attach,
+            settings = {
+                pylsp = {
+                    plugins = {
+                        pycodestyle = {
+                            ignore = { "E501" }
+                        },
+                    },
+                }
+            }
         })
     end,
     ["jsonls"] = function()

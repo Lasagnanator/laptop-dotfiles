@@ -33,6 +33,8 @@ bufferline.setup({
             and ft ~= "packer"
             and ft ~= "help"
             and ft ~= "wiki"
+            and ft ~= "DiffviewFiles"
+            and ft ~= "qf"
             then
                 return true
             end
