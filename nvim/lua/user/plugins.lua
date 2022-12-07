@@ -76,6 +76,7 @@ return require("packer").startup({
         use "lambdalisue/suda.vim" -- Edit with su permission maintaining personal configuration
         use "norcalli/nvim-colorizer.lua" -- Colorful hex codes
         use "b0o/schemastore.nvim" -- JSON schemas downloader for JSON LSP
+        use "isobit/vim-caddyfile" -- Caddyfile syntax highlighting
         use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
 
         --<< Git
