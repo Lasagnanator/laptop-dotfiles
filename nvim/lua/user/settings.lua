@@ -1,3 +1,7 @@
+--<< SETTINGS >>--
+
+
+--<< Options
 local settings = {
     number         = true,
     relativenumber = true,
@@ -26,3 +30,6 @@ local settings = {
 for k, v in pairs(settings) do
     vim.opt[k] = v
 end
+
+--<< Variables
+vim.g.suda_smart_edit = 1
