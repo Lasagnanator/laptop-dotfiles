@@ -24,6 +24,7 @@ Me, enlightened by the Way Of The Vim, Master of the Tile and Hater of the Roden
     - symbol-only nerd fonts (or equivalent) 
     - xbacklight or equivalent
     - pipewire and wireplumber, with compatibility packages for alsa and pulseaudio (important)
+    - xdg-utils
 
 There will be others, the list is incomplete, deal with it for the time being. If you get an error... Well, that's what you get in early access.
     

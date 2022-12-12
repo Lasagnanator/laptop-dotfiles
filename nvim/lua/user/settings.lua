@@ -17,6 +17,7 @@ local settings = {
     softtabstop    = 4,
     smarttab       = false,
     wrap           = false,
+    modeline       = true,
     showmode       = false,
     hlsearch       = false,
     termguicolors  = true,
