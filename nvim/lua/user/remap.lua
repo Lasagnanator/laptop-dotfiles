@@ -9,6 +9,7 @@ local keymap   = vim.keymap.set
 vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 keymap( "", "<Space>", "<Nop>", silent )
+keymap( "", "<Esc>",   "<Esc>", silent )
 
 --<< NORMAL MODE >>--
 

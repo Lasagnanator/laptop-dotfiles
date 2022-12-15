@@ -10,7 +10,7 @@ local set_ft_conf = function ()
 end
 
 --<< Autocommands
-autocmd({ 'BufEnter', 'BufWinEnter' }, {
-    pattern = '*.conf',
-    callback = set_ft_conf
-})
+-- autocmd({ 'BufEnter', 'BufWinEnter' }, {
+--     pattern = '*.conf',
+--     callback = set_ft_conf
+-- })
