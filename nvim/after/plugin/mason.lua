@@ -64,7 +64,7 @@ end
 
 --<< Mason-lsp settings
 mason_lsp.setup({
-    ensure_installed = { "sumneko_lua", "bashls", "pyright" }, -- If not found, download and install declared LSPs "pylsp" "pyright"
+    ensure_installed = { "bashls" }, -- If not found, download and install declared LSPs; Python uses "pylsp" "pyright"
 })
 
 --<< LSP servers setup (handlers)
