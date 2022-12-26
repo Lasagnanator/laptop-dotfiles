@@ -14,7 +14,19 @@ local silent   = { noremap = true, silent = true }
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-nvim_tree.setup({})
+nvim_tree.setup({
+    view = {
+        mappings = {
+            list = {
+                -- Remove unusued ones
+                { key = { "<C-[>" , "<C-]>" }, action = "" },
+                { key = "}", action = "cd" },
+                { key = "{", action = "dir_up" },
+            },
+        },
+    },
+})
+
 
 --<< Keys
 keymap( "n", "<Leader>ee", nvim_tree.toggle, silent )

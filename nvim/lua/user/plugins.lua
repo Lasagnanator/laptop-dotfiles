@@ -35,6 +35,11 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
         }
 
+        --<< Extra languages
+        use "isobit/vim-caddyfile" -- Caddyfile syntax highlighting
+        use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
+        use "elkowar/yuck.vim" -- .yuck file syntax highlighting
+
         --<< Navigation
         use { "nvim-tree/nvim-tree.lua", -- File navigation
             requires = "kyazdani42/nvim-web-devicons",
@@ -76,8 +81,6 @@ return require("packer").startup({
         use "lambdalisue/suda.vim" -- Edit with su permission maintaining personal configuration
         use "norcalli/nvim-colorizer.lua" -- Colorful hex codes
         use "b0o/schemastore.nvim" -- JSON schemas downloader for JSON LSP
-        use "isobit/vim-caddyfile" -- Caddyfile syntax highlighting
-        use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
 
         --<< Git
         use "tpope/vim-fugitive" -- Git tools inside neovim
@@ -91,6 +94,7 @@ return require("packer").startup({
         use "jiangmiao/auto-pairs" -- Generate final bracket automatically
         use "tpope/vim-surround" -- Manipulate brackets and other delimiters
         use "tpope/vim-repeat" -- More advanced repeating with dot
+        use "gpanders/nvim-parinfer" -- Manages parenthesis while editing LISP-like files
         use { "alvan/vim-closetag", -- Manipulate html tags
             ft = { "html", "xhtml", "phtml", "markdown" }
         }

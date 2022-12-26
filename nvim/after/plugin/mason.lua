@@ -110,7 +110,7 @@ mason_lsp.setup_handlers({
                         autoSearchPaths = true,
                         diagnosticMode = "workspace",
                         useLibraryCodeForTypes = true,
-                        typeCheckingMode = "basic", -- Options: off, basic, strict
+                        typeCheckingMode = "off", -- Options: off, basic, strict
                     },
                 },
             },
