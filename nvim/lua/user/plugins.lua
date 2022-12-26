@@ -24,6 +24,7 @@ return require("packer").startup({
         use { "nvim-treesitter/playground", -- Treesitter informations in Neovim
             requires = "nvim-treesitter/nvim-treesitter",
         }
+        use "nvim-treesitter/nvim-treesitter-context" -- Shows which function are you editing on the first line of the screen
         use "folke/lsp-colors.nvim" -- Fills in the colors missing from TS servers
 
         --<< LSP and diagnostics
