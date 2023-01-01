@@ -1,40 +1,14 @@
 -- Standard awesome library
-local gears         = require("gears")
 local awful         = require("awful")
--- require("awful.autofocus") -- [needed?]
--- Widget and layout library
-local wibox         = require("wibox")
--- Theme handling library
-local beautiful     = require("beautiful")
--- Notification library
-local naughty       = require("naughty")
--- Declarative object management
-local ruled         = require("ruled")
-local menubar       = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-                      require("awful.hotkeys_popup.keys")
 
 -- {{{ Organized modules for cleaner code
-local global = require("configs.global")
-               require("configs.keybindings")
-               require("configs.buttons")
---               require("configs.functions")
---               require("configs.widgets")
---               require("configs.bar")
---               require("configs.rules")
+local global = require("modules.global")
 
 local bling  = require("bling")
 
 -- {{{ Variables
-modkey       = global.modkey
-terminal     = global.terminal
-browser      = global.browser
-editor       = global.editor
-explorer     = global.explorer
-editor_cmd   = global.editor_cmd
-explorer_cmd = global.explorer_cmd
+local modkey       = global.modkey
+local terminal     = global.terminal
 
 local term_scratch = bling.module.scratchpad {
     command   = terminal .. " --class spad",             -- How to spawn the scratchpad

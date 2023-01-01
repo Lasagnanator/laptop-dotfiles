@@ -13,7 +13,7 @@ local colors = require("themes.custom.colors")
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "iosevka 11"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -26,7 +26,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap         = dpi(5)
+theme.useless_gap         = dpi(10)
 theme.border_width        = dpi(1)
 theme.border_color_normal = colors.purple
 theme.border_color_active = colors.orange
@@ -34,8 +34,8 @@ theme.border_color_marked = colors.fucsia
 
 theme.taglist_fg_empty    = theme.fg_normal
 theme.taglist_bg_empty    = theme.bg_normal
-theme.taglist_fg_focus    = colors.purple
-theme.taglist_bg_focus    = colors.orange
+theme.taglist_fg_focus    = colors.orange
+theme.taglist_bg_focus    = theme.bg_normal
 theme.taglist_fg_occupied = colors.purple
 theme.taglist_bg_occupied = theme.bg_normal
 theme.taglist_fg_urgent   = colors.cyan
@@ -54,13 +54,13 @@ theme.taglist_bg_urgent   = theme.bg_normal
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
+-- local taglist_square_size = dpi(4)
+-- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+--     taglist_square_size, theme.fg_normal
+-- )
+-- theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+--     taglist_square_size, theme.fg_normal
+-- )
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -108,7 +108,7 @@ theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/m
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
 -- theme.wallpaper = themes_path.."default/background.png"
-theme.wallpaper = "/home/lasagna/Pictures/Synthwave/Synthwave city.png"
+theme.wallpaper = os.getenv("HOME") .. "/Pictures/Synthwave/Synthwave city.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -148,17 +148,21 @@ end)
 -- {{{ Bling
 -- theme.dont_swallow_classname_list = { "firefox", "Gimp", "Blender" } 
 -- theme.dont_swallow_filter_activated = true
-theme.parent_filter_list   = {                              -- class names list of parents that should not be swallowed
+theme.parent_filter_list   = {    -- class names list of parents that should not be swallowed
     "firefox",
     "Gimp",
     "Blender",
     "Lutris",
     "Unity",
     "Virt-manager",
+    "virt-manager",
     "code - oss",
+    "jetbrains-studio",
 }
-theme.child_filter_list    = { "kitty" }                    -- class names list that should not swallow their parents
-theme.swallowing_filter    = true                           -- whether the filters above should be active
+theme.child_filter_list    = {    -- class names list that should not swallow their parents
+    "kitty",
+}
+theme.swallowing_filter    = true -- whether the filters above should be active
 
 return theme
 

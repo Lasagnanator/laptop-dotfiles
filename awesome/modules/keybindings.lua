@@ -4,22 +4,17 @@
 
 -- Standard awesome library
 local awful         = require("awful")
--- Notification library
-local naughty       = require("naughty")
 -- Declarative object management
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Bling
 local bling         = require("bling")
 
 -- Variables
-local global = require("configs.global")
+local global = require("modules.global")
 local modkey       = global.modkey
 local terminal     = global.terminal
 local browser      = global.browser
-local editor       = global.editor
 local launcher     = global.launcher
-local explorer     = global.explorer
-local editor_cmd   = global.editor_cmd
 local explorer_cmd = global.explorer_cmd
 
 -- General keybinds
@@ -35,7 +30,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey,           }, "w",      function() awful.spawn(browser)       end,
               { description = "open the browser",  group = "launcher" }),
     awful.key({ modkey,           }, "e",      function() awful.spawn(explorer_cmd)  end,
-              { description = "open the browser",  group = "launcher" }),
+              { description = "open the explorer",  group = "launcher" }),
     awful.key({ modkey            }, "p",      function() awful.spawn(launcher)      end,
               { description = "show app launcher", group = "launcher" }),
 })
@@ -224,7 +219,7 @@ client.connect_signal("request::default_keybindings", function()
                   { description = "toggle fullscreen",         group = "client" }),
         awful.key({ modkey, "Shift"   }, "q",
             function()
-                tag = awful.screen.focused().selected_tag
+                local tag = awful.screen.focused().selected_tag
                 for _,c in ipairs(tag:clients()) do
                     c:kill()
                 end
@@ -232,7 +227,7 @@ client.connect_signal("request::default_keybindings", function()
                   { description = "close all clients in tag",  group = "client" }),
         awful.key({ modkey, "Control" }, "q",
             function()
-                tag = awful.screen.focused().selected_tag
+                local tag = awful.screen.focused().selected_tag
                 for _,c in ipairs(tag:clients()) do
                     if c == client.focus then goto focused end
                     c:kill()
@@ -248,18 +243,32 @@ client.connect_signal("request::default_keybindings", function()
                   { description = "select master",             group = "client" }),
         awful.key({ modkey, "Mod1"    }, "space", function(c) awful.client.setmaster(c)              end,
                   { description = "move to master",            group = "client" }),
-        awful.key({ modkey, "Control" }, "]",     function(c) c:move_to_screen( c.screen.index + 1 ) end,
+        awful.key({ modkey, "Mod1"    }, "]",     function(c) c:move_to_screen( c.screen.index + 1 ) end,
                   { description = "move to screen",            group = "client" }),
-        awful.key({ modkey, "Control" }, "[",     function(c) c:move_to_screen( c.screen.index - 1 ) end,
+        awful.key({ modkey, "Mod1"    }, "[",     function(c) c:move_to_screen( c.screen.index - 1 ) end,
                   { description = "move to screen",            group = "client" }),
         awful.key({ modkey,           }, "t",     function(c) c.ontop = not c.ontop                  end,
                   { description = "toggle keep on top",        group = "client" }),
-        awful.key({ modkey,           }, "m",
+        awful.key({ modkey, "Shift"   }, "m",
             function (c)
                 c.maximized = not c.maximized
                 c:raise()
             end,
                   { description = "(un)maximize",              group = "client" }),
+        awful.key({ modkey,           }, "b",
+            function (c)
+                c.minimized = true
+            end ,
+                  {description = "minimize", group = "client"}),
+        awful.key({ modkey, "Shift"   }, "b",
+              function ()
+                  local c = awful.client.restore()
+                  -- Focus restored client
+                  if c then
+                    c:activate { raise = true, context = "key.unminimize" }
+                  end
+              end,
+                  {description = "restore minimized", group = "client"}),
     })
 end)
 

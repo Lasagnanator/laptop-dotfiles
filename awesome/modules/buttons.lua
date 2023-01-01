@@ -1,19 +1,10 @@
 -- Standard awesome library
 local awful = require("awful")
 -- Organized modules for cleaner code
-local global = require("configs.global")
-require("configs.bar")
+local global = require("modules.global")
 
 -- {{{ Variables
-modkey = global.modkey
-terminal = global.terminal
-browser = global.browser
-editor = global.editor
-explorer = global.explorer
-editor_cmd = global.editor_cmd
-explorer_cmd = global.explorer_cmd
-
-
+local modkey = global.modkey
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
