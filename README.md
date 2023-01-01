@@ -8,7 +8,7 @@ Me, enlightened by the Way Of The Vim, Master of the Tile and Hater of the Roden
 ## Dependencies
 
     - Awesome, git version possibly
-    - picom
+    - picom (jonaburg's fork)
     - feh
     - rofi
     - kitty
