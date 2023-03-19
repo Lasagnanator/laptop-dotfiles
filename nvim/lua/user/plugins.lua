@@ -102,7 +102,9 @@ return require("packer").startup({
         }
 
         --<< Theming and customizing
-        use "glepnir/dashboard-nvim" -- Customize the opening screen
+        use { "glepnir/dashboard-nvim", -- Customize the opening screen
+            requires = {'kyazdani42/nvim-web-devicons'}
+        }
         use { "nvim-lualine/lualine.nvim", -- Custom statusline written in Lua
             requires = { "kyazdani42/nvim-web-devicons" },
         }
