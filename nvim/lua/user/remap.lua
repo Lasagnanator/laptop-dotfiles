@@ -11,6 +11,15 @@ vim.g.maplocalleader = " "
 keymap( "", "<Space>", "<Nop>", silent )
 keymap( "", "<Esc>",   "<Esc>", silent )
 
+
+--<< ALL MODES >>--
+
+--<< Yank and paste
+keymap( { "n", "x" }, "<Leader>y", [["+y]], silent )
+keymap( { "n", "x" }, "<Leader>p", [["+p]], silent )
+
+
+
 --<< NORMAL MODE >>--
 
 --<< Base
@@ -62,6 +71,7 @@ keymap( "n", "<C-p>u",        "<Cmd>PackerSync<CR>\
                                <Cmd>TSUpdate<CR>",           nosilent )
 keymap( "n", "<Leader>lm",    "<Cmd>Mason<CR>",              nosilent )
 
+
 --<< VISUAL MODE >>--
 -- TODO: adapt the move commands to <Cmd> instead of :
 
@@ -75,6 +85,7 @@ keymap( "v", "<A-k>",         ":move .-1<CR>==",             silent )
 --<< Block
 keymap( "x", "<A-j>",         ":move '>+1<CR>gv-gv",         silent )
 keymap( "x", "<A-k>",         ":move '<-2<CR>gv-gv",         silent )
+
 
 --<< ALTERNATIVES >>--
 

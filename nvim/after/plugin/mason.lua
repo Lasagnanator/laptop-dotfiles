@@ -78,8 +78,8 @@ mason_lsp.setup_handlers({
     end,
 
     -- Personalized handlers
-    ["sumneko_lua"] = function()
-        lspconfig.sumneko_lua.setup({
+    ["lua_ls"] = function()
+        lspconfig.lua_ls.setup({
             on_attach = on_attach,
             on_new_config = function(client)
                 -- if vim.fn.expand('%:p'):match("/awesome/") then

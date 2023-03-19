@@ -40,6 +40,7 @@ return require("packer").startup({
         use "isobit/vim-caddyfile" -- Caddyfile syntax highlighting
         use "fladson/vim-kitty" -- Kitty.conf file syntax highlighting
         use "elkowar/yuck.vim" -- .yuck file syntax highlighting
+        use "theRealCarneiro/hyprland-vim-syntax" -- Hyprland configuration syntax highlighting
 
         --<< Navigation
         use { "nvim-tree/nvim-tree.lua", -- File navigation
