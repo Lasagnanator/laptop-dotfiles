@@ -2,6 +2,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local gears = require("gears")
 
 --<< Personal modules
 local taglist = require("modules.taglist")
@@ -52,8 +53,8 @@ local mykeyboardlayout = awful.widget.keyboardlayout()
 local mytextclock = wibox.widget.textclock()
 
 --Separators
-local lsep = widgets.left_slope
-local rsep = widgets.right_slope
+-- local lsep = widgets.left_slope
+-- local rsep = widgets.right_slope
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
@@ -122,10 +123,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 layout = wibox.layout.fixed.horizontal,
                 s.mylayoutbox,
                 -- lsep(colors.orange, colors.purple, 24),
-                widgets.debug("DEBUG", theme_path),
+                widgets.debug("DEBUG", gears.filesystem.get_configuration_dir() .. 'modules/scripts/vol.sh'),
+                wibox.widget.textbox("  "),
+                widgets.debug_shell("SHELL", "pamixer --get-mute"),
                 -- lsep(colors.orange, colors.purple, 24),
             },
-            { -- Middle widget
+            { -- Middle widget)
                 layout = wibox.layout.align.horizontal,
                 -- expand = "none",
                 taglist(s),
@@ -137,14 +140,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 -- mykeyboardlayout,
                 -- rsep(colors.orange, colors.purple, 24),
                 wibox.widget.systray(),
+                wibox.widget.textbox("  "),
+                widgets.brightness_keymap(beautiful.bg_normal, colors.orange, '#656EA6'),
+                wibox.widget.textbox("  "),
                 -- rsep(colors.orange, colors.purple, 24),
-                widgets.mem,
+                widgets.volume_keybind(beautiful.bg_normal, colors.orange, '#656EA6'),
+                wibox.widget.textbox("  "),
+                widgets.mem(beautiful.bg_normal, colors.orange, '#656EA6'),
                 -- rsep(colors.orange, colors.purple, 24),
-                widgets.cpu(beautiful.bg_normal, colors.orange, colors.gray),
+                wibox.widget.textbox("  "),
+                widgets.cpu(beautiful.bg_normal, colors.orange, '#656EA6'),
+                wibox.widget.textbox("  "),
+                -- widgets.cpu_stack_test(beautiful.bg_normal, colors.orange, '#484F75'),
                 -- rsep(colors.orange, colors.purple, 24),
-                widgets.temp,
+                widgets.temp(beautiful.bg_normal, colors.orange, '#656EA6'),
+                wibox.widget.textbox("  "),
                 -- rsep(colors.orange, colors.purple, 24),
-                widgets.bat,
+                widgets.bat(beautiful.bg_normal, colors.orange, '#656EA6'),
                 -- rsep(colors.orange, colors.purple, 24),
                 mytextclock,
             },

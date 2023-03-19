@@ -2,20 +2,54 @@
 -- Keybinds --
 --------------
 
--- Standard awesome library
+--<< AwesomeWM modules
 local awful         = require("awful")
--- Declarative object management
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Bling
 local bling         = require("bling")
+local naughty       = require("naughty")
+local gears         = require("gears")
 
--- Variables
+--<< Personal modules
 local global = require("modules.global")
+
+--<< Variables
 local modkey       = global.modkey
 local terminal     = global.terminal
 local browser      = global.browser
 local launcher     = global.launcher
 local explorer_cmd = global.explorer_cmd
+
+--<< Functions
+local update_script_path = gears.filesystem.get_configuration_dir() .. 'modules/scripts/vol.sh'
+
+local function volume(action, quantity)
+    if action == 'inc' then
+        awful.spawn.easy_async_with_shell('pamixer -i ' .. quantity .. '; ' .. update_script_path, function (stdout)
+            awesome.emit_signal('volume', stdout)
+        end)
+    elseif action == 'dec' then
+        awful.spawn.easy_async_with_shell('pamixer -d ' .. quantity .. '; ' .. update_script_path, function (stdout)
+            awesome.emit_signal('volume', stdout)
+        end)
+    elseif action == 'mute' then
+        awful.spawn.easy_async_with_shell('pamixer -t; ' .. update_script_path, function (stdout)
+            awesome.emit_signal('volume', stdout)
+        end)
+    else
+        naughty.notification {
+            title = 'You fucked up bro',
+            message = 'Incorrect argument given in configuration, accepted parameters are "inc", "dec", and "mute"',
+        }
+    end
+end
+
+local function brightness (action, quantity)
+    awful.spawn.easy_async_with_shell('xbacklight -' .. action .. ' ' .. quantity .. '; xbacklight', function (stdout)
+        awesome.emit_signal('brightness', math.floor(stdout + 0.5))
+    end)
+end
+
+--<< KEYBINDS >>--
 
 -- General keybinds
 awful.keyboard.append_global_keybindings({
@@ -33,6 +67,8 @@ awful.keyboard.append_global_keybindings({
               { description = "open the explorer",  group = "launcher" }),
     awful.key({ modkey            }, "p",      function() awful.spawn(launcher)      end,
               { description = "show app launcher", group = "launcher" }),
+    awful.key({ modkey,           }, "z",      function() awful.spawn.with_shell("~/.scripts/lockscreen")      end,
+              { description = "lock the screen", group = "launcher" }),
 })
 
 -- Tags related keybinds
@@ -136,6 +172,15 @@ awful.keyboard.append_global_keybindings({
               { description = "focus the next screen",     group = "screen" }),
     awful.key({ modkey,           }, "[",     function() awful.screen.focus_relative(-1)         end,
               { description = "focus the previous screen", group = "screen" }),
+    awful.key({ modkey, "Shift"   }, "b",
+          function ()
+              local c = awful.client.restore()
+              -- Focus restored client
+              if c then
+                c:activate { raise = true, context = "key.unminimize" }
+              end
+          end,
+              {description = "restore minimized", group = "client"}),
 })
 
 -- Layout related keybinds
@@ -190,21 +235,55 @@ awful.keyboard.append_global_keybindings({
 
 -- Media keys binds
 awful.keyboard.append_global_keybindings({
-    awful.key({}, "XF86AudioRaiseVolume",  function() awful.spawn.with_shell("raise-volume")                               end,
+    awful.key({}, "XF86AudioRaiseVolume",
+        function()
+            -- awful.spawn(os.getenv("HOME") .. "/.scripts/raise-volume")
+            -- awesome.emit_signal("volume_increase")
+            volume('inc', 1)
+        end,
               { description="raise volume",       group="media" }),
-    awful.key({}, "XF86AudioLowerVolume",  function() awful.spawn.with_shell("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-")  end,
+    awful.key({}, "XF86AudioLowerVolume",
+        function()
+            -- awful.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-")
+            -- awesome.emit_signal("volume_decrease")
+            volume('dec', 1)
+        end,
               { description="lower volume",       group="media" }),
-    awful.key({}, "XF86AudioMute",         function() awful.spawn.with_shell("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") end,
+    awful.key({}, "XF86AudioMute",
+        function()
+            -- awful.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
+            -- awesome.emit_signal("mute_change")
+            volume('mute', 1)
+        end,
               { description="mute audio",         group="media" }),
-    awful.key({}, "XF86MonBrightnessUp",   function() awful.spawn.with_shell("xbacklight -inc 1")                          end,
+    awful.key({}, "XF86MonBrightnessUp",
+        function()
+            -- awful.spawn("xbacklight -inc 5")
+            -- awesome.emit_signal("brightness_increase")
+            brightness('inc', 1)
+        end,
               { description="increase backlight", group="media" }),
-    awful.key({}, "XF86MonBrightnessDown", function() awful.spawn.with_shell("xbacklight -dec 1")                          end,
+    awful.key({}, "XF86MonBrightnessDown",
+        function()
+            -- awful.spawn("xbacklight -dec 5")
+            -- awesome.emit_signal("brightness_decrease")
+            brightness('dec', 1)
+        end,
               { description="decrease backlight", group="media" }),
-    awful.key({}, "XF86AudioPlay",         function() awful.spawn.with_shell("playerctl play-pause")                       end,
+    awful.key({}, "XF86AudioPlay",
+        function()
+            awful.spawn("playerctl play-pause")
+        end,
               { description="play/pause",         group="media" }),
-    awful.key({}, "XF86AudioNext",         function() awful.spawn.with_shell("playerctl next")                             end,
+    awful.key({}, "XF86AudioNext",
+        function()
+            awful.spawn("playerctl next")
+        end,
               { description="next track",         group="media" }),
-    awful.key({}, "XF86AudioPrev",         function() awful.spawn.with_shell("playerctl previous")                         end,
+    awful.key({}, "XF86AudioPrev",
+        function()
+            awful.spawn("playerctl previous")
+        end,
               { description="previous track",     group="media" }),
 })
 
@@ -260,15 +339,6 @@ client.connect_signal("request::default_keybindings", function()
                 c.minimized = true
             end ,
                   {description = "minimize", group = "client"}),
-        awful.key({ modkey, "Shift"   }, "b",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                    c:activate { raise = true, context = "key.unminimize" }
-                  end
-              end,
-                  {description = "restore minimized", group = "client"}),
     })
 end)
 
